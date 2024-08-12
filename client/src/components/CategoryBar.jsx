@@ -1,53 +1,45 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import QM from "../assets/questionIcon.svg"
+import ActionMenu from './ActionMenu'
 
-function Category() {
+function CategoryBar() {
   return (
-    <div className='flex text-sm'>
-      <div className='flex'>
+    <div className='flex justify-between items-center text-sm'>
+      <div className='flex text-[#878787]'>
         <div>
-          <Link>
+          <Link className="px-[14px] py-[10px]">
             Featured
           </Link>
         </div>
         <div>
-          <Link>
+          <Link className="px-[14px] py-[10px]">
             Fashion
           </Link>
         </div>
         <div>
-          <Link>
+          <Link className="px-[14px] py-[10px]">
             Health and Beauty
           </Link>
         </div>
         <div>
-          <Link>
+          <Link className="px-[14px] py-[10px]">
             Electronics
           </Link>
         </div>
         <div>
-          <Link>
+          <Link className="px-[14px] py-[10px]">
             Grocery
           </Link>
         </div>
         <div>
-          <Link>
+          <Link className="px-[14px] py-[10px]">
             Livestock
           </Link>
         </div>
       </div>
-      <div>
-        <button>
-          <Link>
-            <img src={QM} alt="" srcset="" />
-            <p>Help</p>
-          </Link>
-        </button>
-        <button>Sell on T-Africa</button>
-      </div>
+      <ActionMenu />
     </div>
   )
 }
 
-export default Category
+export default CategoryBar

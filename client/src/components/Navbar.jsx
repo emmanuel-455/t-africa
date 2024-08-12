@@ -7,16 +7,16 @@ import Cart from "../assets/cartIcon.svg"
 
 function Navbar() {
   return (
-    <div className='flex justify-between items-center p-4'>
+    <div className='flex justify-between items-center py-[16px]'>
       <div className='flex gap-[24px] flex-row items-center'>
         <img src={logo} alt="" />
         <div>
-          <button className='mr-[12px] px-[10px] py-[4px] bg-[#06C569] text-white font-bold rounded-[10px]'>
+          <button className='mr-[12px] px-[10px] py-[4px] bg-[#06C569] text-[14px] text-white rounded-[10px]'>
             <Link>
               Products
             </Link>
           </button>
-          <Link>
+          <Link className='text-[14px]'>
             Manufacturers
           </Link>
         </div>
@@ -33,14 +33,14 @@ function Navbar() {
       </div>
 
       <div className='flex justify-center gap-[20px] items-center'>
-        <button className='text-white rounded-[13px] px-[10px] py-[6px] bg-[#06C569] font-bold'>
+        <button className='text-white text-[14px] rounded-[13px] px-[10px] py-[6px] bg-[#06C569]'>
           Sign in
         </button>
-        <div className='flex gap-[8px]'>
+        <div className='flex bg-[#F3F4F6] py-[6px] px-[10px] rounded-[13px] text-[14px] gap-[8px]'>
           <img src={Message} alt="" />
           <p>Messages</p>
         </div>
-        <div className='flex  gap-[8px]'>
+        <div className='flex text-[14px] bg-[#F3F4F6] py-[6px] px-[10px] rounded-[13px] gap-[8px]'>
           <img src={Cart} alt="" />
           Cart
         </div>

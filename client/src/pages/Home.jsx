@@ -1,11 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-import Category from '../components/Category'
+import CategoryBar from '../components/CategoryBar'
 
 function Home() {
   return (
     <div className=''>
-     <Category />
+     <CategoryBar />
     </div>
   )
 }
