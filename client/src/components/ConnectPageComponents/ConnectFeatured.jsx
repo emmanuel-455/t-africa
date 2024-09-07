@@ -8,6 +8,40 @@ import Food from '../../assets/food.svg';
 import Cosmetics from '../../assets/cosmetics.svg';
 import Home from '../../assets/home.svg';
 
+// Define the categories data
+const categories = [
+  {
+    name: 'Agricultural Products',
+    image: Agric,
+    description: 'Explore a wide range of Nigerian agricultural products.',
+  },
+  {
+    name: 'Textiles and Apparel',
+    image: Textile,
+    description: 'Explore a wide range of Nigerian textiles and apparel.',
+  },
+  {
+    name: 'Handicrafts and Artisanal Goods',
+    image: Handicraft,
+    description: 'Explore a wide range of Nigerian handicrafts and artisanal goods.',
+  },
+  {
+    name: 'Food and Beverages',
+    image: Food,
+    description: 'Discover a variety of Nigerian food and beverage exports.',
+  },
+  {
+    name: 'Cosmetics and Personal Care',
+    image: Cosmetics,
+    description: 'Explore a wide range of Nigerian cosmetics and personal care products.',
+  },
+  {
+    name: 'Home and Decor',
+    image: Home,
+    description: 'Explore a wide range of Nigerian home and decor items.',
+  },
+];
+
 function ConnectFeatured() {
   const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
 
@@ -16,10 +50,10 @@ function ConnectFeatured() {
   };
 
   return (
-    <div className='w-full px-[70px] pt-[81px]'>
+    <div className='w-full px-[70px] mb-[159px] pt-[81px]'>
       <div className='flex flex-col w-full mx-auto items-center justify-center'>
         {/* Featured Categories Badge */}
-        <span className='text-emerald mb-[18px] text-lg px-3.5 py-2.5 bg-[#E6F9F0] rounded'>
+        <span className='text-emerald mb-[18px] text-lg px-3.5 py-2.5 bg-[#E6F9F0] text-brandGreen rounded'>
           Featured Categories
         </span>
         
@@ -35,89 +69,21 @@ function ConnectFeatured() {
 
         {/* Featured Categories Section */}
         <div className='flex flex-wrap gap-[24px] mt-[48px] justify-center w-full'>
-          {/* Category Card 1 */}
-          <div
-            className='bg-[#E6F9F0] p-5 rounded-[10px] gap-[12px] flex items-start w-[29%] flex-col cursor-pointer'
-            onClick={() => handleCategoryClick('Agricultural Products')}
-          >
-            <div>
-              <img src={Agric} alt="Agricultural Products" />
+          {categories.map((category, index) => (
+            <div
+              key={index}
+              className='bg-[#E6F9F0] p-5 rounded-[10px] gap-[12px] flex items-start w-[29%] flex-col cursor-pointer'
+              onClick={() => handleCategoryClick(category.name)}
+            >
+              <div>
+                <img src={category.image} alt={category.name} />
+              </div>
+              <div>
+                <h1 className='font-bold text-sm'>{category.name}</h1>
+                <p className='text-sm'>{category.description}</p>
+              </div>
             </div>
-            <div>
-              <h1 className='font-bold text-sm'>Agricultural Products</h1>
-              <p className='text-sm'>Explore a wide range of Nigerian agricultural products.</p>
-            </div>
-          </div>
-
-          {/* Category Card 2 */}
-          <div
-            className='bg-[#E6F9F0] p-5 rounded-[10px] gap-[12px] flex items-start w-[29%] flex-col cursor-pointer'
-            onClick={() => handleCategoryClick('Textiles and Apparel')}
-          >
-            <div>
-              <img src={Textile} alt="Textiles and Apparel" />
-            </div>
-            <div>
-              <h1 className='font-bold text-sm'>Textiles and Apparel</h1>
-              <p className='text-sm'>Explore a wide range of Nigerian textiles and apparel.</p>
-            </div>
-          </div>
-
-          {/* Category Card 3 */}
-          <div
-            className='bg-[#E6F9F0] p-5 rounded-[10px] gap-[12px] flex items-start w-[29%] flex-col cursor-pointer'
-            onClick={() => handleCategoryClick('Handicrafts and Artisanal Goods')}
-          >
-            <div>
-              <img src={Handicraft} alt="Handicrafts and Artisanal Goods" />
-            </div>
-            <div>
-              <h1 className='font-bold text-sm'>Handicrafts and Artisanal Goods</h1>
-              <p className='text-sm'>Explore a wide range of Nigerian handicrafts and artisanal goods.</p>
-            </div>
-          </div>
-
-          {/* Category Card 4 */}
-          <div
-            className='bg-[#E6F9F0] p-5 rounded-[10px] gap-[12px] flex items-start w-[29%] flex-col cursor-pointer'
-            onClick={() => handleCategoryClick('Food and Beverages')}
-          >
-            <div>
-              <img src={Food} alt="Food and Beverages" />
-            </div>
-            <div>
-              <h1 className='font-bold text-sm'>Food and Beverages</h1>
-              <p className='text-sm'>Discover a variety of Nigerian food and beverage exports.</p>
-            </div>
-          </div>
-
-          {/* Category Card 5 */}
-          <div
-            className='bg-[#E6F9F0] p-5 rounded-[10px] gap-[12px] flex items-start w-[29%] flex-col cursor-pointer'
-            onClick={() => handleCategoryClick('Cosmetics and Personal Care')}
-          >
-            <div>
-              <img src={Cosmetics} alt="Cosmetics and Personal Care" />
-            </div>
-            <div>
-              <h1 className='font-bold text-sm'>Cosmetics and Personal Care</h1>
-              <p className='text-sm'>Explore a wide range of Nigerian cosmetics and personal care products.</p>
-            </div>
-          </div>
-
-          {/* Category Card 6 */}
-          <div
-            className='bg-[#E6F9F0] p-5 rounded-[10px] gap-[12px] flex items-start w-[29%] flex-col cursor-pointer'
-            onClick={() => handleCategoryClick('Home and Decor')}
-          >
-            <div>
-              <img src={Home} alt="Home and Decor" />
-            </div>
-            <div>
-              <h1 className='font-bold text-sm'>Home and Decor</h1>
-              <p className='text-sm'>Explore a wide range of Nigerian home and decor items.</p>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Display Selected Category */}

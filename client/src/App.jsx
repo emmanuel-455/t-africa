@@ -11,8 +11,7 @@ import Home from './pages/Home/Home';
 import EmailConfirmation from './pages/EmailConfirmation/EmailConfirmation';
 import Footer from './components/Footer';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
-import Connect from './pages/Home/Home';
-
+import SellerDetails from './pages/SellerDetails/SellerDetails'; // Ensure this path is correct
 
 // Layout component for consistent layout across pages
 function Layout() {
@@ -27,7 +26,6 @@ function Layout() {
   );
 }
 
-
 // Main App component
 function App() {
   return (
@@ -38,8 +36,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/verified-sellers/:sellerName" element={<SellerDetails />} />
           </Route>
-
 
           {/* Routes outside the main layout (e.g., login/signup pages) */}
           <Route path="/signin" element={<Login />} />

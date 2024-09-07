@@ -8,7 +8,7 @@ function ConnectBanner() {
       className='w-full h-screen bg-cover bg-center'
       style={{ backgroundImage: `url(${Banner})` }}
     >
-      <div className='w-[513px] gap-[24px] pt-32 ml-16 flex flex-col'>
+      <div className='w-[513px] gap-[24px] pt-[14%] ml-16 flex flex-col'>
         <h1 className='text-[57px] font-[500] leading-[58px] text-white'>
           Connect with reliable Nigerian exporters
         </h1>
