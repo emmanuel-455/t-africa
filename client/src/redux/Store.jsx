@@ -23,3 +23,16 @@ export const errorAtom = atom(null);
 export const codeAtom = atom(''); // Initialize with an empty string for the 6-digit code
 
 export const selectedCategoryAtom = atom(null);
+
+// Store review rating filter (e.g., 4.0 & up, 4.5 & up, etc.)
+export const ratingFilterAtom  = atom(null);
+
+// Price range filter
+export const priceRangeAtom = atom({ min: '', max: '' });
+
+// Minimum order filter
+export const minOrderAtom = atom('');
+
+export const minPriceAtom = atom(null); // To store minimum price
+export const maxPriceAtom = atom(null); // To store maximum price
+

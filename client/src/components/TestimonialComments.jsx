@@ -23,13 +23,12 @@ function TestimonialComments() {
   ];
 
   return (
-    <div className='w-full px-6 py-8'>
-      <h2 className='text-2xl font-bold mb-6 text-center'>What Our Clients Say</h2>
-      <div className='flex flex-wrap gap-6 justify-center'>
+    <div className='w-full py-8'>
+      <div className='flex justify-between gap-6'>
         {Testimonia.map((testimonial, index) => (
           <div
             key={index}
-            className='bg-[#F9F9F9] p-6 rounded-lg shadow-md flex flex-col items-start gap-4 w-full md:w-1/3 lg:w-1/4'
+            className='bg-[#F9F9F9] p-6 rounded-lg flex flex-col items-start gap-4 w-full'
           >
             {/* User Info Section */}
             <div className='flex items-center gap-4'>
@@ -45,14 +44,14 @@ function TestimonialComments() {
               )}
 
               <div>
-                <h3 className='font-semibold text-lg'>{testimonial.name}</h3>
-                <p className='text-sm text-gray-600'>{testimonial.occupation}</p>
+                <h3 className='font-bold text-sm'>{testimonial.name}</h3>
+                <p className='text-sm text-black'>{testimonial.occupation}</p>
               </div>
             </div>
 
             {/* Comment Section */}
             <div>
-              <p className='mt-2 text-lg font-medium text-black'>{testimonial.comment}</p>
+              <p className='mt-2 text-base font-medium text-black'>{testimonial.comment}</p>
             </div>
           </div>
         ))}

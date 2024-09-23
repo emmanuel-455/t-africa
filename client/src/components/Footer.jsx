@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <div className='flex mt-[149px] mb-[128px] justify-between mx-[160px] items-start'>
+    <div className='flex mb-[128px] justify-between mx-[160px] items-start'>
       <div className=''>
         <div className='mb-[33px]'>
           <img src={logo} alt="Logo" />

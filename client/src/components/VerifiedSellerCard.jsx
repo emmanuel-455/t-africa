@@ -42,11 +42,11 @@ const VerifiedSellerCard = () => {
 
             {/* Card Info Section */}
             <div className="p-4 bg-[#F6F7FA]">
-              <h3 className="font-bold text-xl mb-2">{seller.name}</h3>
-              <p className="text-[14px] mb-2">{seller.items}</p>
+              <h3 className="font-bold text-lg mb-2">{seller.name}</h3>
+              <p className="text-sm mb-2">{seller.items}</p>
               <Link
                 to={`/verified-sellers/${seller.name.toLowerCase()}`}
-                className="text-brandGreen flex items-center justify-start text-lg font-bold"
+                className="text-brandGreen flex items-center justify-start text-base font-bold"
               >
                 View supplier <img src={Chevron} alt="" />
               </Link>
