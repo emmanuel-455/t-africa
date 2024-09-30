@@ -22,18 +22,18 @@ function ConnectBanner() {
   };
 
   return (
-    <div className='flex flex-col md:flex-row h-screen'>
+    <div className='flex md:flex-row lg:h-screen'>
       
       {/* Left Section */}
       <div
-        className='w-full md:w-1/2 h-[60%] md:h-screen bg-cover bg-center'
+        className='w-full lg:w-1/2 h-[411px] lg:h-screen bg-cover bg-center'
         style={{ backgroundImage: `url(${Left})` }}
       >
-        <div className='w-full md:w-[513px] gap-[24px] pt-[25%] px-4 md:px-16 flex flex-col'>
+        <div className='w-full pr-[44px] pl-[37px] pt-[54px] lg:w-[640px] gap-[24px] lg:pt-[20%] px-4 md:px-16 flex flex-col'>
           <h1 className='text-[32px] md:text-[57px] font-[500] leading-[36px] md:leading-[58px] text-white'>
             Connect with reliable Nigerian exporters
           </h1>
-          <p className='text-sm md:text-lg leading-[20px] md:leading-[24px] text-white mb-4'>
+          <p className='lg:text-lg text-base md:text-lg leading-[20px] md:leading-[24px] text-white mb-4'>
             Search and connect with top Nigerian exporters and manufacturers. Explore a wide range of high-quality products.
           </p>
           <div className="relative gap-2 w-full">
@@ -57,7 +57,7 @@ function ConnectBanner() {
 
       {/* Right Section (Only visible on larger screens) */}
       <div
-        className='hidden md:block w-full md:w-1/2 h-full bg-cover bg-center'
+        className='hidden lg:block w-full md:w-1/2 h-full bg-cover bg-center'
         style={{ backgroundImage: `url(${Right})` }}
       />
     </div>

@@ -13,7 +13,7 @@ function ProductDetails() {
   const [cartItems, setCartItems] = useAtom(cartAtom); // Manage cart items using jotai atom
   const navigate = useNavigate(); // Hook for navigating programmatically
 
-  const user = true; // Assume user is not logged in (set to true when user is logged in)
+  const user = true; // Assume user is not logged in (change this based on actual authentication state)
 
   // Fetch product details on component mount
   useEffect(() => {
@@ -32,7 +32,7 @@ function ProductDetails() {
       id: product.id, // Product ID
       name: product.title, // Product title
       price: product.price, // Product price
-      quantity, // Selected quantity      
+      quantity, // Selected quantity
       image: selectedImage, // Selected image or fallback to thumbnail
     };
 
@@ -56,7 +56,7 @@ function ProductDetails() {
     if (user) {
       handleAddToCart(); // If user is logged in, add the product to the cart
     } else {
-      navigate('/signup'); // If user is not logged in, redirect to signup page
+      navigate('/signin'); // If user is not logged in, redirect to signin page
     }
   };
 

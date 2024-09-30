@@ -17,11 +17,11 @@ const axiosInstance = axios.create({
  */
 export const fetchProducts = async (page) => {
   try {
-    const response = await axiosInstance.get(`/products?skip=${(page - 1) * 30}`);
+    const response = await axiosInstance.get(`https://dummyjson.com/products?skip=${(page - 1) * 30}`);
     return response.data.products;  // Return the products data
-  } catch (error) {
-    console.error('Failed to fetch products:', error);
-    throw error;  // Throw the error to be handled in the component
+  } catch (err) {
+    console.error('Failed to fetch products:', err);
+    throw err;  // Throw the error to be handled in the component
   }
 };
 

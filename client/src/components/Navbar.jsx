@@ -6,6 +6,7 @@ import Message from "../assets/messageIcon.svg";
 import CartIcon from "../assets/cartIcon.svg";
 import Search from "../assets/SearchNav.svg";
 import Cart from "./Cart";
+import Menu from "../assets/MenuIcon.svg"
 
 function Navbar() {
   const user = true;
@@ -43,14 +44,19 @@ function Navbar() {
   return (
     <div className='bg-white'>
       {user ? (
-        <div className='flex justify-between items-center px-[100px] py-[20px]'>
+        <div className='flex justify-between items-center px-[16px] lg:px-[100px] md:py-[20px] py-[14px]'>
           <div className='flex gap-[24px] flex-row items-center'>
-            <img src={Logo} alt="Logo" />
-            <div className='flex font-medium gap-[12px] flex-row items-center'>
-              <Link to="/about" onClick={closeCart}>About</Link>
+            <Link className='w-[110px]' to="./">
+              <img src={Logo} alt="Logo"
+              
+              />
+            </Link>
+            
+            <div className='flex hidden lg:block font-medium flex-row items-center'>
+              <Link className='mr-[12px]' to="/about" onClick={closeCart}>About</Link>
               <Link to="/contact" onClick={closeCart}>Contact</Link>
             </div>
-            <div className='flex items-center gap-[10px]'>
+            <div className='flex lg:flex hidden lg:block items-center gap-2.5'>
               <input
                 type='text'
                 placeholder='Search'
@@ -65,7 +71,9 @@ function Navbar() {
             </div>
           </div>
 
-          <div className='flex justify-center gap-[20px] items-center'>
+          <img className="block lg:hidden" src={Menu} alt="" />
+
+          <div className='flex hidden lg:flex justify-center gap-[20px] items-center'>
             <Link className='flex gap-[8px] font-bold items-center' to="/profile" onClick={closeCart}>
               <img src={Profile} alt="Profile" className='w-[24px]' />
               <p>Chidalu</p> {/* Static name for now */}
