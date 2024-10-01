@@ -31,7 +31,7 @@ function Category() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className='flex justify-between px-[100px] pb-[16px] bg-white'>
+    <div className='flex lg:flex hidden lg:block justify-between px-[100px] pb-[16px] bg-white'>
       {/* Dropdown Button */}
       <div className='relative'>
         <button

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from "../assets/T-LOGO.svg";
 import Profile from "../assets/PP.png";
-import Message from "../assets/messageIcon.svg";
 import CartIcon from "../assets/cartIcon.svg";
 import Search from "../assets/SearchNav.svg";
 import Cart from "./Cart";
-import Menu from "../assets/MenuIcon.svg"
+import Menu from "../assets/MenuIcon.svg";
+import MessageDropdown from './MessageDropdown'; // Import the MessageDropdown component
 
 function Navbar() {
   const user = true;
@@ -47,15 +47,15 @@ function Navbar() {
         <div className='flex justify-between items-center px-[16px] lg:px-[100px] md:py-[20px] py-[14px]'>
           <div className='flex gap-[24px] flex-row items-center'>
             <Link className='w-[110px]' to="./">
-              <img src={Logo} alt="Logo"
-              
-              />
+              <img src={Logo} alt="Logo" />
             </Link>
             
             <div className='flex hidden lg:block font-medium flex-row items-center'>
               <Link className='mr-[12px]' to="/about" onClick={closeCart}>About</Link>
               <Link to="/contact" onClick={closeCart}>Contact</Link>
             </div>
+
+            {/* Search Input */}
             <div className='flex lg:flex hidden lg:block items-center gap-2.5'>
               <input
                 type='text'
@@ -78,11 +78,11 @@ function Navbar() {
               <img src={Profile} alt="Profile" className='w-[24px]' />
               <p>Chidalu</p> {/* Static name for now */}
             </Link>
-            <div className='flex bg-[#F3F4F6] py-[6px] px-[10px] rounded-[13px] font-medium text-[14px] gap-[8px]' onClick={closeCart}>
-              <img src={Message} alt="Messages" />
-              <p>Messages</p>
-            </div>
 
+            {/* Message Dropdown */}
+            <MessageDropdown />
+
+            {/* Cart Dropdown */}
             <div className='relative'>
               <div
                 className='flex font-medium text-[14px] bg-[#F3F4F6] py-[6px] px-[10px] rounded-[13px] gap-[8px] cursor-pointer'
@@ -110,11 +110,11 @@ function Navbar() {
               <ul className='flex gap-[12px] text-sm'>
                 {/* Add your categories here */}
               </ul>
-                <div className='flex gap-[12px] text-sm'>
+              <div className='flex gap-[12px] text-sm'>
                 <div className='flex font-medium gap-[12px] flex-row items-center'>
-              <Link to="/about" onClick={closeCart}>About</Link>
-              <Link to="/contact" onClick={closeCart}>Contact</Link>
-            </div>
+                  <Link to="/about" onClick={closeCart}>About</Link>
+                  <Link to="/contact" onClick={closeCart}>Contact</Link>
+                </div>
                 <button className='rounded-[10px] px-[10px] py-[6px] bg-[#EFF0F2] border border-[#E0E5EB]'>
                   Sign Up
                 </button>

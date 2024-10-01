@@ -56,7 +56,7 @@ const FilterSection = () => {
   };
 
   return (
-    <div className='flex flex-col gap-[16px]'>
+    <div className='flex hidden lg:block flex-col gap-[16px]'>
       <h1 className='font-bold text-[24px]'>Filters</h1>
       <div className='gap-[16px] p-4 flex flex-col bg-white rounded-[16px]'>
 

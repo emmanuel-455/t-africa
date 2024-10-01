@@ -9,7 +9,7 @@ function SearchProduct() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [ratingFilter, setRatingFilter] = useAtom(ratingFilterAtom);  // Get the rating filter from Jotai
+  const [ratingFilter, setRatingFilter] = useAtom(ratingFilterAtom);  
   const [minPrice, setMinPrice] = useAtom(minPriceAtom);
   const [maxPrice, setMaxPrice] = useAtom(maxPriceAtom);
 
@@ -69,31 +69,33 @@ function SearchProduct() {
     if (searchQuery) {
       fetchSearchResults();
     }
-  }, [searchQuery, ratingFilter, minPrice, maxPrice]);  // Re-run whenever the search query, rating filter, or price range changes
+  }, [searchQuery, ratingFilter, minPrice, maxPrice]);  
 
   return (
     <div className='p-4'>
-      <h2 className='text-xl mb-[25px] font-bold'>Showing results for "{searchQuery}"</h2>
+      <h2 className='text-xl mb-6 font-bold'>Showing results for "{searchQuery}"</h2>
       
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
           <p>Loading...</p>
         </div>
       ) : error ? (
-        <div className="text-center ">loading...</div>
+        <div className="text-center ">Failed to load products...</div>
       ) : products.length ? (
-        <div className='flex flex-wrap gap-[20px]'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {products.map((product) => (
             <Link
               to={`/product/${product.id}`}
-              key={product.id} className='flex rounded-[16px] flex-col gap-[16px] bg-white w-[23%]'>
+              key={product.id} 
+              className='flex flex-col rounded-lg bg-white shadow-md overflow-hidden'
+            >
               <div className='w-full h-48 bg-[#E0E5EB]'>
-                <img src={product.thumbnail} alt={product.title} className='p-2 w-full object-cover' />
+                <img src={product.thumbnail} alt={product.title} className='p-2 w-full h-full object-cover' />
               </div>
-              <div className='px-2 mb-[20px] gap-1' >
-                <h3 className='text-base leading-[20px] font-normal'>{product.title}</h3>
-                <p className='text-black font-bold'>₦{product.price}</p>
-                <p className='text-sm'>Min. order: {product.minimumOrderQuantity} pieces</p>
+              <div className='px-4 py-2'>
+                <h3 className='text-lg font-semibold mb-2'>{product.title}</h3>
+                <p className='text-black font-bold mb-1'>₦{product.price}</p>
+                <p className='text-sm text-gray-600'>Min. order: {product.minimumOrderQuantity} pieces</p>
               </div>
             </Link>
           ))}

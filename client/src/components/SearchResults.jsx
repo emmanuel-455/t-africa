@@ -13,9 +13,9 @@ function SearchResults() {
         </div>
         <SupplierProductMenu />
       
-      <div className='flex pl-[90px] pr-[60px] justify-between flex-row gap-[20px]'>
-        <div className='w-[20%]'><FilterSection /></div>
-        <div className='w-[80%]'>
+      <div className='lg:flex lg:pl-[90px] lg:pr-[60px] justify-between flex-row gap-[20px]'>
+        <div className='lg:w-[20%]'><FilterSection /></div>
+        <div className='lg:w-[80%] w-full'>
         <SearchProduct />
       </div>
         </div>

@@ -10,7 +10,7 @@ function SupplierProductMenu() {
   };
 
   return (
-    <div className='text-sm flex flex-row items-center bg-white w-[44.2%] mt-[16px] mb-[24px] m-auto rounded-[62px] p-[6px] justify-center font-medium gap-[10px]'>
+    <div className='text-sm hidden lg:block flex flex-row items-center bg-white w-[44.2%] mt-[16px] mb-[24px] m-auto rounded-[62px] p-[6px] justify-center font-medium gap-[10px]'>
       {/* Links with dynamic background based on the active link */}
       <Link
         to="/products"

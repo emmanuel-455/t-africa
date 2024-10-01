@@ -69,7 +69,7 @@ function ConnectFeatured() {
 
         {/* Featured Categories Section */}
         <div className='w-full overflow-x-auto lg:overflow-x-visible'>
-          <div className='flex lg:grid pl-[16px] lg:grid-cols-3 gap-4 lg:gap-[20px] mt-8 lg:mt-[48px] lg:w-full'>
+          <div className='flex lg:grid pl-[16px] lg:grid-cols-3 gap-4 lg:gap-[20px] mt-8 lg:mt-[48px] lg:w-full md:pl-[80px] lg:pl-0'>
             {categories.map((category, index) => (
               <div
                 key={index}
@@ -88,12 +88,7 @@ function ConnectFeatured() {
           </div>
         </div>
 
-        {/* Display Selected Category */}
-        {selectedCategory && (
-          <div className='mt-6 md:mt-10'>
-            <h2 className='text-lg md:text-2xl font-bold'>Selected Category: {selectedCategory}</h2>
-          </div>
-        )}
+        
       </div>
     </div>
   );
