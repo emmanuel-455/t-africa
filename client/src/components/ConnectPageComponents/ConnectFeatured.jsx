@@ -50,7 +50,7 @@ function ConnectFeatured() {
   };
 
   return (
-    <div className='w-full lg:px-[100px] mb-[159px] pt-[40px] md:pt-[81px]'>
+    <div className='w-full lg:px-[100px] mb-[159px] pt-[46px] md:pt-[54px] lg:pt-[80px]'>
       <div className='flex flex-col w-full mx-auto items-center justify-center'>
         {/* Featured Categories Badge */}
         <span className='mb-4 font-medium md:mb-[18px] text-base md:text-lg px-3 py-2.5 bg-[#E6F9F0] text-brandGreen rounded'>
@@ -69,7 +69,7 @@ function ConnectFeatured() {
 
         {/* Featured Categories Section */}
         <div className='w-full overflow-x-auto lg:overflow-x-visible'>
-          <div className='flex lg:grid md:pl-[80px] pl-[16px] lg:grid-cols-3 gap-4 lg:gap-[20px] mt-8 lg:mt-[48px] lg:w-full'>
+          <div className='flex lg:grid pl-[16px] lg:grid-cols-3 gap-4 lg:gap-[20px] mt-8 lg:mt-[48px] lg:w-full'>
             {categories.map((category, index) => (
               <div
                 key={index}

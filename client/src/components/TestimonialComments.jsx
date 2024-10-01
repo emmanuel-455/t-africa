@@ -23,35 +23,37 @@ function TestimonialComments() {
   ];
 
   return (
-    <div className='w-full py-8'>
-      <div className='flex justify-between gap-6'>
+    <div className="w-full overflow-x-auto lg:overflow-x-visible">
+      <div className="flex lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:pl-[80px] lg:pl-0  lg:gap-[20px]">
         {Testimonia.map((testimonial, index) => (
           <div
             key={index}
-            className='bg-[#F9F9F9] p-6 rounded-lg flex flex-col items-start gap-4 w-full'
+            className="bg-[#F9F9F9] p-6 rounded-lg flex flex-col items-start gap-4 min-w-[285px] lg:w-auto"
           >
             {/* User Info Section */}
-            <div className='flex items-center gap-4'>
+            <div className="flex items-center gap-4">
               {/* Display user image if available */}
               {testimonial.image ? (
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className='w-[36px] h-[36px] rounded-full object-cover'
+                  className="w-[36px] h-[36px] rounded-full object-cover"
                 />
               ) : (
-                <div className='w-[36px] h-[36px] rounded-full bg-[#D9D9D9]'></div> // Placeholder for missing image
+                <div className="w-[36px] h-[36px] rounded-full bg-[#D9D9D9]"></div> // Placeholder for missing image
               )}
 
               <div>
-                <h3 className='font-bold text-sm'>{testimonial.name}</h3>
-                <p className='text-sm text-black'>{testimonial.occupation}</p>
+                <h3 className="font-bold text-sm">{testimonial.name}</h3>
+                <p className="text-sm text-black">{testimonial.occupation}</p>
               </div>
             </div>
 
             {/* Comment Section */}
             <div>
-              <p className='mt-2 text-base font-medium text-black'>{testimonial.comment}</p>
+              <p className="mt-2 text-base text-wrap font-medium text-black">
+                {testimonial.comment}
+              </p>
             </div>
           </div>
         ))}

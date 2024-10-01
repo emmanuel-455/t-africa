@@ -20,7 +20,7 @@ function TopSellerProduct() {
   return (
     <div className="w-full overflow-x-auto lg:overflow-x-visible">
       {/* Use flex for small screens and grid for larger screens */}
-      <div className="flex lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pl-4 lg:pl-0 gap-4 lg:gap-[20px] mt-8 lg:mt-[48px] lg:w-full">
+      <div className="flex lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pl-4  gap-4 lg:gap-[20px] mt-8 lg:mt-[48px] lg:w-full md:pl-[80px] lg:pl-0">
         {topSellerProducts.map((item) => (
           <Link
             to={`/product/${item.id}`}  // Use Link to navigate to product detail page

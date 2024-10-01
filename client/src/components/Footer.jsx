@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <div className='flex mb-[128px] justify-between mx-[160px] items-start'>
-      <div className=''>
-        <div className='mb-[33px]'>
+    <div className='flex md:flex-row flex-col md:pb-[80px] pb-[50px] lg:pb-[79px] lg:px-[160px] px-[39px] justify-between md:px-[100px] items-start'>
+      <div className='flex flex-col gap-6 md:mb-0 mb-[110px]'>
+        <div className=''>
           <img src={logo} alt="Logo" />
         </div>
-        <div className='mb-[33px]'>
+        <div className=''>
           <p className='text-[16px]'>© 2024 T-Africa</p>
         </div>
-        <div className='flex'>
+        <div className='flex gap-[26px]'>
           <div>
-            <Link className='text-[16px] mr-[54px]'>Privacy Policy</Link>
+            <Link className='text-[16px]'>Privacy Policy</Link>
           </div>
           <div>
             <Link className='text-[16px]'>Terms & Conditions</Link>
@@ -30,7 +30,7 @@ function Footer() {
             <Link>Contact</Link>
           </div>
         </div>
-        <div className='w-[156px]'>
+        <div className='w-[110px]'>
           <h6 className='text-[16px] mb-[12px] font-[700]'>Stay in touch</h6>
           <div className='text-[14px] gap-[12px] flex flex-col'>
             <Link className='underline'>Instagram</Link>
