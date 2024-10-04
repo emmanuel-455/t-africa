@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import { useAtom } from 'jotai'; // Import useAtom to manage cart state
-import { cartAtom } from '../../Redux/Store.js'; // Import cartAtom to manage the cart state
+
 import Cart from "../../assets/cart.svg"; // Import the cart icon
 import Cart2 from "../../assets/cart2.svg"; // Import the contact supplier icon
 
@@ -10,7 +9,7 @@ function ProductDetails() {
   const [quantity, setQuantity] = useState(1); // Manage quantity state
   const [product, setProduct] = useState(null); // Manage product details
   const [selectedImage, setSelectedImage] = useState(''); // Manage selected product image
-  const [cartItems, setCartItems] = useAtom(cartAtom); // Manage cart items using jotai atom
+  
   const navigate = useNavigate(); // Hook for navigating programmatically
 
   const user = true; // Assume user is not logged in (change this based on actual authentication state)
