@@ -1,7 +1,7 @@
 // src/App.jsx
 import React from 'react';
 import { Provider } from 'jotai'; // Jotai Provider for state management
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, Outlet } from 'react-router-dom'; // Use HashRouter
 
 // Importing components from their respective folders
 import Signup from './pages/Signup/Signup';
