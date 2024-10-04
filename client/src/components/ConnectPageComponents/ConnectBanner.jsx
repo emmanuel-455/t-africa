@@ -10,14 +10,17 @@ function ConnectBanner() {
 
   // Handle input change
   const handleInputChange = (event) => {
-    setSearchQuery(event.target.value);
+    setSearchQuery(event.target.value); // Update input value without trimming yet
   };
 
   // Handle search submit (on Enter key press or button click)
   const handleSearchSubmit = (event) => {
     if (event.key === 'Enter' || event.type === 'click') {
-      // Navigate to search results page with searchQuery as a URL parameter
-      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+      const trimmedQuery = searchQuery.trim().toLowerCase(); // Trim spaces and convert to lowercase
+      if (trimmedQuery) {
+        // Navigate to search results page with searchQuery as a URL parameter
+        navigate(`/search?query=${encodeURIComponent(trimmedQuery)}`);
+      }
     }
   };
 
