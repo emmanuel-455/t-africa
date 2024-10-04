@@ -1,5 +1,5 @@
 import Trash from '../assets/trash.svg';
-import Check from "../assets/check.svg";
+import Check from "../assets/Check.svg";
 import { cartAtom } from '../redux/Store';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
