@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import { ratingFilterAtom, minPriceAtom, maxPriceAtom } from '../Redux/Store'; // Import the required atoms
 import { useEffect, useState } from 'react';
 
-const FilterSectigion = () => {
+const FilterSection = () => {
   const [selectedRating, setSelectedRating] = useAtom(ratingFilterAtom); // Rating filter state
   const [tempMinPrice, setTempMinPrice] = useState(''); // Temporary min price input
   const [tempMaxPrice, setTempMaxPrice] = useState(''); // Temporary max price input
