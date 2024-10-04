@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { Link } from 'react-router-dom';
-import { productsAtom } from '../Redux/Store';
+import { productsAtom } from '../redux/Store';
 
 function TopSellerProduct() {
   const [products] = useAtom(productsAtom);

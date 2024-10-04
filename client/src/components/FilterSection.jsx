@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { ratingFilterAtom, minPriceAtom, maxPriceAtom } from '../Redux/Store'; // Import the required atoms
+import { ratingFilterAtom, minPriceAtom, maxPriceAtom } from '../redux/Store'; // Import the required atoms
 import { useEffect, useState } from 'react';
 
 const FilterSection = () => {

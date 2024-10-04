@@ -1,6 +1,6 @@
 import Trash from '../assets/trash.svg';
 import Check from "../assets/check.svg";
-import { cartAtom } from '../Redux/Store';
+import { cartAtom } from '../redux/Store';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';

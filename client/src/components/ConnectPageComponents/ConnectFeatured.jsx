@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { selectedCategoryAtom } from '../../Redux/Store'; 
+import { selectedCategoryAtom } from '../../redux/Store'; 
 import Agric from '../../assets/Agricon.svg';
 import Textile from '../../assets/textiles.svg';
 import Handicraft from '../../assets/handicraft.svg';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import { useAtom } from 'jotai'; // Import useAtom to manage cart state
-import { cartAtom } from '../../Redux/Store'; // Import cartAtom to manage the cart state
+import { cartAtom } from '../../redux/Store'; // Import cartAtom to manage the cart state
 import Cart from "../../assets/cart.svg"; // Import the cart icon
 import Cart2 from "../../assets/cart2.svg"; // Import the contact supplier icon
 
