@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { cartAtom } from '../../redux/Store';  // Import the cart atom
+import { cartAtom } from '../../redux/Store.js';  // Import the cart atom
 import Trash from '../../assets/trash.svg';
 
 const ViewCart = () => {
