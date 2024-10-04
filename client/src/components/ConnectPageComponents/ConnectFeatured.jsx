@@ -6,7 +6,7 @@ import Textile from '../../assets/textiles.svg';
 import Handicraft from '../../assets/handicraft.svg';
 import Food from '../../assets/food.svg';
 import Cosmetics from '../../assets/cosmetics.svg';
-import Home from '../../assets/home.svg';
+import Home from '../../assets/Home.svg';
 
 // Define the categories data
 const categories = [
