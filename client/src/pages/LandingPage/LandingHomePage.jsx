@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { productsAtom, loadingAtom, errorAtom } from '../../redux/Store';
+import { productsAtom, loadingAtom, errorAtom } from '../../redux/Store.js';
 import ConnectBanner from '../../components/ConnectPageComponents/ConnectBanner';
 import ConnectFeatured from '../../components/ConnectPageComponents/ConnectFeatured';
 import TopSeller from '../../components/TopSeller';

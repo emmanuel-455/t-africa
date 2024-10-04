@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useAtom } from 'jotai';
-import { codeAtom } from '../../redux/Store';
+import { codeAtom } from '../../redux/Store.js';
 import Logo from '../../components/Logo';
 import FormFooter from '../../components/FormFooter';
 

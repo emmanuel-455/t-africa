@@ -7,7 +7,6 @@ import Help from "../assets/questionIcon.svg";
 function Category() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [categories, setCategories] = useState([]); // State to store fetched categories
-  const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
 
   // Fetch categories when the component mounts
@@ -17,17 +16,14 @@ function Category() {
         const products = await fetchProducts(1); // Fetch products from API (page 1)
         const fetchedCategories = products.map(product => product.category); // Assuming category is part of product
         setCategories([...new Set(fetchedCategories)]); // Set unique categories
-        setLoading(false); // Loading is done
       } catch (err) {
         setError('Failed to fetch categories');
-        setLoading(false);
       }
     };
 
     fetchCategories();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -56,13 +52,17 @@ function Category() {
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
             <ul className="py-2 text-sm text-gray-700">
-              {categories.map((category, index) => (
-                <li key={index}>
-                  <Link to={`/search?query=${category}`} className="block px-4 py-2 hover:bg-gray-100">
-                    {category}
-                  </Link>
-                </li>
-              ))}
+              {categories.length > 0 ? (
+                categories.map((category, index) => (
+                  <li key={index}>
+                    <Link to={`/search?query=${category}`} className="block px-4 py-2 hover:bg-gray-100">
+                      {category}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li className="px-4 py-2">No categories available</li>
+              )}
             </ul>
           </div>
         )}
