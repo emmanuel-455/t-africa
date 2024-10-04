@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Left from "../../assets/left.png";
+import Left from "../../assets/Left.png";
 import Right from "../../assets/right.png";
 import SearchIcon from "../../assets/connectSearch.svg"; // Import search icon as an image
 
