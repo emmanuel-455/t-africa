@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import DPVector from "../assets/vector.svg"
+import DPVector from "../assets/Vector.svg"
 
 function FormFooter() {
   return (
