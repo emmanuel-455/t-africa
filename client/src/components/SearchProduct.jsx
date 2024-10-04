@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { fetchProducts } from '../utils/api';
 import { useAtom } from 'jotai';
-import { ratingFilterAtom, minPriceAtom, maxPriceAtom } from '../Redux/Store'; 
+import { ratingFilterAtom, minPriceAtom, maxPriceAtom } from '../Redux/Store.js'; 
 
 function SearchProduct() {
   const location = useLocation();
