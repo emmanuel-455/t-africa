@@ -65,7 +65,7 @@ function ProductDetails() {
       <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start gap-4">
         <div className="flex flex-row lg:flex-col gap-2">
           {/* Thumbnails */}
-          <div className="flex flex-row lg:flex-col space-y-2 space-x-2 lg:space-x-0 lg:mr-[10px]">
+          <div className="flex flex-col lg:flex-col space-y-2 space-x-2 lg:space-x-0 lg:mr-[10px]">
             {product.images.map((img, index) => (
               <div
                 key={index}

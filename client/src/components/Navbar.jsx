@@ -4,103 +4,73 @@ import Logo from "../assets/T-LOGO.svg";
 import Profile from "../assets/PP.png";
 import CartIcon from "../assets/cartIcon.svg";
 import Search from "../assets/SearchNav.svg";
-import Cart from "./Cart";
+import CartDropdown from './Cart'; // Import CartDropdown
 import Menu from "../assets/MenuIcon.svg";
 import MessageDropdown from './MessageDropdown'; // Import the MessageDropdown component
+import SearchOverlay from './SearchOverlay'; // Import the SearchOverlay component
 
 function Navbar() {
   const user = true;
-  const [isCartOpen, setIsCartOpen] = useState(false); // State to track cart visibility
-  const [searchTerm, setSearchTerm] = useState(''); // State to track search input
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [isSearchOpen, setIsSearchOpen] = useState(false); // State to track the search overlay
+
   const navigate = useNavigate(); // Navigation hook to handle route changes
 
-  const openCart = () => setIsCartOpen(true);
-  const closeCart = () => setIsCartOpen(false);
-
-  const toggleCart = () => {
-    setIsCartOpen(prevState => !prevState);
+  // Toggle mobile menu
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(prevState => !prevState);
   };
 
-  // Handle search input changes
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
+  // Open the search overlay
+  const openSearchOverlay = () => {
+    setIsSearchOpen(true);
   };
 
-  // Handle search action (same logic as in the banner)
-  const handleSearch = () => {
-    if (searchTerm.trim()) {
-      navigate(`/search?query=${searchTerm}`); // Redirect to search page with the query
-      closeCart(); // Close cart if it's open
-    }
-  };
-
-  // Handle search on Enter key press
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
+  // Close the search overlay
+  const closeSearchOverlay = () => {
+    setIsSearchOpen(false);
   };
 
   return (
     <div className='bg-white'>
       {user ? (
         <div className='flex justify-between items-center px-[16px] lg:px-[100px] md:py-[20px] py-[14px]'>
-          <div className='flex gap-[24px] flex-row items-center'>
+          <div className='flex gap-2 lg:gap-[24px] flex-row items-center'>
             <Link className='w-[110px]' to="./">
               <img src={Logo} alt="Logo" />
             </Link>
-            
-            <div className='flex hidden lg:block font-medium flex-row items-center'>
-              <Link className='mr-[12px]' to="/about" onClick={closeCart}>About</Link>
-              <Link to="/contact" onClick={closeCart}>Contact</Link>
+
+            {/* Desktop Menu */}
+            <div className='hidden lg:flex font-medium flex-row items-center'>
+              <Link className='lg:mr-[12px]' to="/about">About</Link>
+              <Link to="/contact">Contact</Link>
             </div>
 
-            {/* Search Input */}
-            <div className='flex lg:flex hidden lg:block items-center gap-2.5'>
-              <input
-                type='text'
-                placeholder='Search'
-                className='w-[300px] px-4 py-[6px] bg-[#F6F7FA] outline-none rounded-[10px] text-[14px] border-none'
-                value={searchTerm}
-                onChange={handleInputChange} // Update state on change
-                onKeyDown={handleKeyDown} // Trigger search on Enter
-              />
-              <button className='bg-[#06C569] p-[8px] rounded-[10px]' onClick={handleSearch}>
-                <img src={Search} alt="Search" />
+            {/* Search Icon (clickable, opens overlay) */}
+            <div className='flex items-center gap-1 lg:gap-2.5'>
+              <button onClick={openSearchOverlay} className="bg-[#EFF0F2] flex items-center text-sm gap-1 text-[#919191] w-[120px] pl-[17px] py-[9px] rounded-full">
+                 Search
               </button>
             </div>
           </div>
 
-          <img className="block lg:hidden" src={Menu} alt="" />
-
-          <div className='flex hidden lg:flex justify-center gap-[20px] items-center'>
-            <Link className='flex gap-[8px] font-bold items-center' to="/profile" onClick={closeCart}>
+          {/* User Actions (Cart, Profile, etc.) */}
+          <div className='flex lg:flex justify-center gap-4 lg:gap-[20px] items-center'>
+            <Link className='hidden lg:flex gap-[8px] font-bold items-center' to="/profile">
               <img src={Profile} alt="Profile" className='w-[24px]' />
               <p>Chidalu</p> {/* Static name for now */}
             </Link>
 
-            {/* Message Dropdown */}
             <MessageDropdown />
 
-            {/* Cart Dropdown */}
-            <div className='relative'>
-              <div
-                className='flex font-medium text-[14px] bg-[#F3F4F6] py-[6px] px-[10px] rounded-[13px] gap-[8px] cursor-pointer'
-                onClick={toggleCart}
-              >
-                <img src={CartIcon} alt="Cart" />
-                Cart
-              </div>
-              {isCartOpen && (
-                <div className="absolute right-0 top-full">
-                  <Cart isCartOpen={isCartOpen} closeCart={closeCart} />
-                </div>
-              )}
-            </div>
+            <CartDropdown />
+
+            <img className="block lg:hidden cursor-pointer" src={Menu} alt="Menu" onClick={toggleMobileMenu} />
           </div>
         </div>
       ) : (
-        <div className='px-[100px] py-[14px]'>
+          // For logged-out users
+          <div className='px-[100px] py-[14px]'>
           <div className='flex justify-between items-center'>
             <Link to="/">
               <img src={Logo} alt="T-Africa Logo" />
@@ -126,6 +96,18 @@ function Navbar() {
           </div>
         </div>
       )}
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className='lg:hidden px-4 py-4 bg-gray-100'>
+          <Link to="/about" onClick={toggleMobileMenu} className='block py-2'>About</Link>
+          <Link to="/contact" onClick={toggleMobileMenu} className='block py-2'>Contact</Link>
+          <Link to="/profile" onClick={toggleMobileMenu} className='block py-2'>Profile</Link>
+        </div>
+      )}
+
+      {/* Search Overlay */}
+      {isSearchOpen && <SearchOverlay closeOverlay={closeSearchOverlay} />}
     </div>
   );
 }

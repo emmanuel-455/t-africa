@@ -27,7 +27,7 @@ function Category() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className='flex lg:flex hidden lg:block justify-between px-[100px] pb-[16px] bg-white'>
+    <div className='flex lg:flex items-center justify-between lg:px-[100px] pb-[16px] bg-white'>
       {/* Dropdown Button */}
       <div className='relative'>
         <button
@@ -61,7 +61,7 @@ function Category() {
                   </li>
                 ))
               ) : (
-                <li className="px-4 py-2">No categories available</li>
+                null
               )}
             </ul>
           </div>
@@ -69,12 +69,12 @@ function Category() {
       </div>
 
       {/* Help & Sell Button */}
-      <div className='flex gap-[10px]'>
-        <div className='font-medium py-[6px] px-[10px] rounded-[10px] flex bg-[#EFF0F2]'>
+      <div className='flex gap-[5px] mr-3'>
+        <div className='font-medium text-nowrap py-[6px] px-[10px] rounded-[10px] flex bg-[#EFF0F2]'>
           <img src={Help} alt="help icon" />
           <p className='text-sm ml-[8px]'>Help</p>
         </div>
-        <Link className='bg-brandGreen py-[6px] px-[10px] rounded-[10px] font-medium text-white text-sm'>
+        <Link className='bg-brandGreen py-[6px] px-[10px] rounded-[10px] font-medium text-nowrap text-white text-sm'>
           Sell on T-Africa
         </Link>
       </div>

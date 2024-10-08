@@ -8,6 +8,9 @@ import VerifiedSeller from '../../components/VerifiedSeller';
 import Testimonial from '../../components/Testimonial';
 import GetStarted from '../../components/GetStarted';
 import LandingNavbar from '../../components/ConnectPageComponents/LandingNavbar';
+import NewArrival from '../../components/NewArrival.jsx';
+import Category from '../../components/Category.jsx';
+import CategoryBox from '../../components/CategoryBox.jsx';
 
 function LandingHomePage() {
   const [products, setProducts] = useAtom(productsAtom);
@@ -37,7 +40,10 @@ function LandingHomePage() {
 
   return (
     <div>
+      <Category />
       <ConnectBanner />
+      <CategoryBox />
+      <NewArrival />
       <ConnectFeatured />
       <TopSeller products={products} />
       <VerifiedSeller />

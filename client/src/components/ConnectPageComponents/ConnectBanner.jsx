@@ -1,68 +1,25 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Left from "../../assets/Left.png";
-import Right from "../../assets/right.png";
-import SearchIcon from "../../assets/connectSearch.svg"; // Import search icon as an image
+import React from 'react';
 
 function ConnectBanner() {
-  const [searchQuery, setSearchQuery] = useState(''); // State to manage search input
-  const navigate = useNavigate(); // React Router's hook for navigation
-
-  // Handle input change
-  const handleInputChange = (event) => {
-    setSearchQuery(event.target.value); // Update input value without trimming yet
-  };
-
-  // Handle search submit (on Enter key press or button click)
-  const handleSearchSubmit = (event) => {
-    if (event.key === 'Enter' || event.type === 'click') {
-      const trimmedQuery = searchQuery.trim().toLowerCase(); // Trim spaces and convert to lowercase
-      if (trimmedQuery) {
-        // Navigate to search results page with searchQuery as a URL parameter
-        navigate(`/search?query=${encodeURIComponent(trimmedQuery)}`);
-      }
-    }
-  };
-
   return (
-    <div className='flex md:flex-row lg:h-screen'>
-      
+    <div className='flex mb-14 flex-col lg:flex-row gap-4 lg:h-[400px] px-2 lg:px-[100px]'>
       {/* Left Section */}
-      <div
-        className='w-full lg:w-1/2 h-[411px] lg:h-screen bg-cover bg-center'
-        style={{ backgroundImage: `url(${Left})` }}
-      >
-        <div className='w-full pr-[44px] pl-[37px] pt-[54px] lg:w-[640px] gap-[24px] lg:pt-[20%] px-4 md:px-16 flex flex-col'>
-          <h1 className='text-[32px] md:text-[57px] font-[500] leading-[36px] md:leading-[58px] text-white'>
-            Connect with reliable Nigerian exporters
-          </h1>
-          <p className='lg:text-lg text-base md:text-lg leading-[20px] md:leading-[24px] text-white mb-4'>
-            Search and connect with top Nigerian exporters and manufacturers. Explore a wide range of high-quality products.
-          </p>
-          <div className="relative gap-2 w-full">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={handleInputChange}
-              onKeyDown={handleSearchSubmit}
-              placeholder="Search"
-              className="w-full py-2 md:py-3 pl-10 font-500 pr-4 rounded-[8px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <img
-              src={SearchIcon}
-              alt="Search Icon"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-gray-400 cursor-pointer"
-              onClick={handleSearchSubmit}
-            />
-          </div>
-        </div>
+      <div className='w-full lg:w-[70%] md:w-[60%] h-[150px] rounded-lg lg:rounded-[30px] bg-brandGreen'>
+        <p className='py-[30px] lg:py-[51px] px-[20px] lg:px-[40px] font-bold text-white text-2xl lg:text-4xl w-full lg:w-[308px]'>
+          40% off everything
+        </p>
       </div>
 
-      {/* Right Section (Only visible on larger screens) */}
-      <div
-        className='hidden lg:block w-full md:w-1/2 h-full bg-cover bg-center'
-        style={{ backgroundImage: `url(${Right})` }}
-      />
+      {/* Right Section */}
+      <div className='flex flex-row md:flex-col w-full lg:w-[30%] gap-4'>
+        {/* First box */}
+        <div className='bg-[#EFF0F2] rounded-lg w-full h-[140px] lg:h-[219px] font-bold px-[20px] lg:px-[30px] py-[10px] lg:py-[37px]'>
+          <p className='text-[17px] lg:text-[20px] w-[full] lg:w-[165px]'>Start selling on T-Africa</p>
+        </div>
+
+        {/* Second box */}
+        <div className='bg-[#EFF0F2] rounded-lg w-full h-[140px] lg:h-[219px]' />
+      </div>
     </div>
   );
 }

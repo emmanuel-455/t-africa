@@ -20,11 +20,17 @@ const MessageDropdown = () => {
   return (
     <div className="relative">
       <button 
-        className='flex bg-[#F3F4F6] py-[6px] px-[10px] rounded-[13px] font-medium text-[14px] gap-[8px]' 
+        className='flex py-[6px] font-medium cursor-pointer text-[14px] gap-[8px]' 
         onClick={toggleDropdown} // Dropdown toggles on click
       >
-        <img src={Message} alt="Messages" />
-        <p>Messages</p>
+        <div className='relative'>
+        <img src={Message} alt="Messages" className='w-[30px] lg:w-[30px]' />
+        {messages.length > 0 && (
+          <div className='absolute top-0 right-0 bg-red-500 text-white rounded-full text-[10px] w-[16px] h-[16px] flex items-center justify-center'>
+            {messages.length}
+          </div>
+          )}
+        </div>
       </button>
 
       {isDropdownOpen && (
