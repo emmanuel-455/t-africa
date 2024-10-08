@@ -24,21 +24,21 @@ const MessageDropdown = () => {
         onClick={toggleDropdown} // Dropdown toggles on click
       >
         <div className='relative'>
-        <img src={Message} alt="Messages" className='w-[30px] lg:w-[30px]' />
-        {messages.length > 0 && (
-          <div className='absolute top-0 right-0 bg-red-500 text-white rounded-full text-[10px] w-[16px] h-[16px] flex items-center justify-center'>
-            {messages.length}
-          </div>
+          <img src={Message} alt="Messages" className='w-[25px] md:w-[30px]' />
+          {messages.length > 0 && (
+            <div className='absolute top-0 right-0 bg-red-500 text-white rounded-full text-[10px] w-[16px] h-[16px] flex items-center justify-center'>
+              {messages.length}
+            </div>
           )}
         </div>
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute right-0 mt-2 w-[320px] bg-white border border-gray-300 rounded-lg shadow-lg">
+        <div className="absolute right-[-100px] md:right-auto md:left-0 mt-2 w-[80vw] md:w-[320px] bg-white border border-gray-300 rounded-lg shadow-lg z-50">
           <div className='p-4 border-b'>
-            <h3 className='text-lg font-semibold'>Messages</h3>
+            <h3 className='text-lg md:text-base font-semibold'>Messages</h3>
           </div>
-          <div className='max-h-60 overflow-y-auto'>
+          <div className='max-h-60 md:max-h-80 overflow-y-auto'>
             {messages.length > 0 ? (
               messages.map((message, index) => (
                 <Link
