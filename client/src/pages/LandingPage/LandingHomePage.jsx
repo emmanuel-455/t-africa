@@ -45,8 +45,8 @@ function LandingHomePage() {
       <ConnectBanner />
       <CategoryBox />
       <NewArrival />
-      <TopSeller products={products} />
       <RandomCateProduct />
+      <TopSeller products={products} />
       <ConnectFeatured />
       <VerifiedSeller />
       <Testimonial />
