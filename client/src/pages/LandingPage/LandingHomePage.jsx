@@ -11,6 +11,7 @@ import LandingNavbar from '../../components/ConnectPageComponents/LandingNavbar'
 import NewArrival from '../../components/NewArrival.jsx';
 import Category from '../../components/Category.jsx';
 import CategoryBox from '../../components/CategoryBox.jsx';
+import RandomCateProduct from '../../components/RandomCateProduct.jsx';
 
 function LandingHomePage() {
   const [products, setProducts] = useAtom(productsAtom);
@@ -44,8 +45,9 @@ function LandingHomePage() {
       <ConnectBanner />
       <CategoryBox />
       <NewArrival />
-      <ConnectFeatured />
       <TopSeller products={products} />
+      <RandomCateProduct />
+      <ConnectFeatured />
       <VerifiedSeller />
       <Testimonial />
       <GetStarted />

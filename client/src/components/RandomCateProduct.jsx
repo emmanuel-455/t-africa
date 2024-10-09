@@ -2,28 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../utils/api';  // Import the fetchProducts API function
 import { Link } from 'react-router-dom';  // Import Link for navigation
 
-const NewArrival = () => {
+const RandomCateProduct = () => {
   const [products, setProducts] = useState([]);
+  const [randomCategory, setRandomCategory] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchNewArrivals = async () => {
+    const fetchRandomCategoryProducts = async () => {
       try {
-        const newProducts = await fetchProducts(1);  // Fetch the first page of products
-        setProducts(newProducts);
+        // Fetch all products (you can adjust the page limit if needed)
+        const allProducts = await fetchProducts(1); 
+
+        // Get unique categories from the fetched products
+        const categories = [...new Set(allProducts.map(product => product.category))];
+        
+        // Select a random category
+        const randomCat = categories[Math.floor(Math.random() * categories.length)];
+        setRandomCategory(randomCat);
+
+        // Filter products based on the randomly selected category
+        const filteredProducts = allProducts.filter(product => product.category === randomCat);
+        setProducts(filteredProducts);
         setLoading(false);
       } catch (err) {
-        setError('Failed to load new arrivals.');
+        setError('Failed to load products.');
         setLoading(false);
       }
     };
 
-    fetchNewArrivals();
+    fetchRandomCategoryProducts();
   }, []);
 
   if (loading) {
-    return <div>Loading new arrivals...</div>;
+    return null;
   }
 
   if (error) {
@@ -32,7 +44,9 @@ const NewArrival = () => {
 
   return (
     <div className="px-2 mb-16">
-      <h2 className="text-lg pl-3 rounded-sm py-1 font-bold bg-[#E6F9F0] text-black mb-2">New Arrivals</h2>
+      <h2 className="text-lg pl-3 rounded-sm py-1 font-bold bg-[#E6F9F0] text-black mb-2">
+        {randomCategory ? `${randomCategory}` : 'Random Category Products'}
+      </h2>
       {/* Horizontal scroll container for mobile */}
       <div className="flex space-x-4 overflow-x-auto">
         {products.map((product) => (
@@ -54,7 +68,7 @@ const NewArrival = () => {
             <div className='flex flex-col justify-between pb-1'>
               <p className="text-lg text-black font-bold mt-1">₦{product.price}</p>
               {/* Display stock (items left) */}
-              <p className="text-sm text-gray-500">{product.stock} items left</p> {/* Adjust the stock data */}
+              <p className="text-sm text-gray-500">{product.stock} items left</p>
             </div>
           </Link>
         ))}
@@ -63,4 +77,4 @@ const NewArrival = () => {
   );
 };
 
-export default NewArrival;
+export default RandomCateProduct;

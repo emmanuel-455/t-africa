@@ -3,7 +3,7 @@ import TopSellerProduct from './TopSellerProduct'
 
 function TopSeller() {
   return (
-    <div className='w-full lg:px-[150px] mb-[159px]'>
+    <div className='w-full lg:px-[150px] mb-[59px]'>
       <div className='flex flex-col w-[340px] md:w-[674px] lg:w-full mx-auto items-center justify-center'>
         <span className='mb-4 md:mb-[18px] text-base font-medium md:text-lg px-3 py-2.5 bg-[#E6F9F0] text-brandGreen rounded'>
           Top Selling Products

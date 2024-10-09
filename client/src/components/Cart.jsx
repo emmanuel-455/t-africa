@@ -46,7 +46,7 @@ const Cart = ({ isCartOpen, closeCart }) => {
   };
 
   return (
-    <div className="absolute top-full right-0 mt-2 bg-white shadow-md rounded-lg p-4 w-[345px]">
+    <div className="absolute top-full z-50 right-0 mt-2 bg-white shadow-md rounded-lg p-4 w-[345px]">
       <h2 className="mb-2 sticky">
         <span className="font-bold mr-1 text-xl">Cart</span>
         <span className="text-base">{cartItems.length} Item{cartItems.length > 1 && 's'}</span>
