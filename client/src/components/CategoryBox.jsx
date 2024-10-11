@@ -1,5 +1,5 @@
   import React, { useState, useEffect } from 'react';
-  import { useNavigate } from 'react-router-dom';
+  import { Link, useNavigate } from 'react-router-dom';
 
   // Assuming fetchProducts is an API call function to get the products
   import { fetchProducts } from '../utils/api'; 
@@ -26,19 +26,15 @@
 
     if (error) return <p>{error}</p>;
 
-    // Handle category click to navigate to search result
-    const handleCategoryClick = (category) => {
-      navigate(`/search?category=${category}`);
-    };
 
     return (
       <div className="grid grid-cols-4 mb-10 sm:grid-cols-3 md:grid-cols-4 gap-1 p-2">
         {categories.length > 0 ? (
           categories.map((category, index) => (
-            <div 
+            <Link to={`/search?query=${category}`}
               key={index} 
               className="cursor-pointer rounded-lg border p-4 flex flex-col items-center hover:bg-gray-100 transition-all" 
-              onClick={() => handleCategoryClick(category)}
+              
             >
               <img 
                 src={`https://source.unsplash.com/random/150x150?${category}`} // Assuming category images are stored with the same name as the category
@@ -50,7 +46,7 @@
                 className="w-16 h-16 object-cover mb-2"
               />
               <p className="text-center font-semibold">{category}</p>
-            </div>
+            </Link>
           ))
         ) : (
           <p>Loading categories...</p>

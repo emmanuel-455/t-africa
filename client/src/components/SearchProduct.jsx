@@ -123,7 +123,7 @@ function SearchProduct() {
       {products.length ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div key={product.id} className="flex flex-col rounded-lg bg-white overflow-hidden">
+            <div key={product.id} className="flex flex-col rounded-t-lg bg-white overflow-hidden">
               <Link to={`/product/${product.id}`} className="w-full h-[8rem] bg-[#E0E5EB]">
                 <img src={product.thumbnail} alt={product.title} className="p-2 w-full h-full object-cover" />
               </Link>
@@ -134,7 +134,7 @@ function SearchProduct() {
               </div>
               <button
                 onClick={() => handleButtonClick(product)}
-                className="ml-2 text-sm text-white bg-green-500 rounded-md hover:bg-green-400"
+                className="text-sm py-2 text-white bg-green-500 w-full font-medium hover:bg-green-400"
               >
                 Add to cart
               </button>
