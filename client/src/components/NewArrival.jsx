@@ -7,11 +7,17 @@ const NewArrival = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Function to shuffle an array
+  const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
+
   useEffect(() => {
     const fetchNewArrivals = async () => {
       try {
         const newProducts = await fetchProducts(1);  // Fetch the first page of products
-        setProducts(newProducts);
+        const shuffledProducts = shuffleArray(newProducts);  // Shuffle the fetched products
+        setProducts(shuffledProducts);
         setLoading(false);
       } catch (err) {
         setError('Failed to load new arrivals.');

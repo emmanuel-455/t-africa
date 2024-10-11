@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { selectedCategoryAtom } from '../../redux/Store'; 
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import Agric from '../../assets/Agricon.svg';
 import Textile from '../../assets/textiles.svg';
 import Handicraft from '../../assets/handicraft.svg';
@@ -14,31 +15,37 @@ const categories = [
     name: 'Agricultural Products',
     image: Agric,
     description: 'Explore a wide range of Nigerian agricultural products.',
+    path: '/categories/agricultural', // Add a path for navigation
   },
   {
     name: 'Textiles and Apparel',
     image: Textile,
     description: 'Explore a wide range of Nigerian textiles and apparel.',
+    path: '/categories/textiles', // Add a path for navigation
   },
   {
     name: 'Handicrafts and Artisanal Goods',
     image: Handicraft,
     description: 'Explore a wide range of Nigerian handicrafts and artisanal goods.',
+    path: '/categories/handicrafts', // Add a path for navigation
   },
   {
     name: 'Food and Beverages',
     image: Food,
     description: 'Discover a variety of Nigerian food and beverage exports.',
+    path: '/categories/food', // Add a path for navigation
   },
   {
     name: 'Cosmetics and Personal Care',
     image: Cosmetics,
     description: 'Explore a wide range of Nigerian cosmetics and personal care products.',
+    path: '/categories/cosmetics', // Add a path for navigation
   },
   {
     name: 'Home and Decor',
     image: Home,
     description: 'Explore a wide range of Nigerian home and decor items.',
+    path: '/categories/home', // Add a path for navigation
   },
 ];
 
@@ -71,8 +78,9 @@ function ConnectFeatured() {
         <div className='w-full overflow-x-auto lg:overflow-x-visible'>
           <div className='flex lg:grid pl-[16px] lg:grid-cols-3 gap-4 lg:gap-[20px] mt-8 lg:mt-[48px] lg:w-full md:pl-[80px] lg:pl-0'>
             {categories.map((category, index) => (
-              <div
+              <Link
                 key={index}
+                to={category.path} // Set the link to the category path
                 className='bg-[#E6F9F0] p-4 md:p-5 rounded-[10px] flex items-start flex-col cursor-pointer min-w-[196px] lg:min-w-0'
                 onClick={() => handleCategoryClick(category.name)}
               >
@@ -83,12 +91,10 @@ function ConnectFeatured() {
                   <h1 className='font-bold text-base'>{category.name}</h1>
                   <p className='text-sm'>{category.description}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
-
-        
       </div>
     </div>
   );
