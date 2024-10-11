@@ -4,26 +4,40 @@ import { useAtom } from 'jotai';
 import { cartAtom } from '../../redux/Store'; 
 import Cart from "../../assets/cart.svg"; 
 import Cart2 from "../../assets/cart2.svg"; 
+import { fetchProducts } from '../../utils/api';  // Import the fetchProducts API
 
 function ProductDetails() {
-  const { id } = useParams();
+  const { id } = useParams();  // Get the product id from the URL
   const [quantity, setQuantity] = useState(1); 
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(''); 
   const [cartItems, setCartItems] = useAtom(cartAtom); 
   const navigate = useNavigate();
 
-  const user = true; 
+  const user = true;  // Assuming user is logged in (you can adjust this based on your auth logic)
 
-  useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
-      .then(response => response.json())
-      .then(data => {
+ 
+    useEffect(() => {
+  // Direct API request to fetch a single product by ID
+  const loadProductDetails = async () => {
+    try {
+      const response = await fetch(`https://dummyjson.com/products/${id}`);
+      const data = await response.json();
+
+      if (response.ok) {
         setProduct(data);
         setSelectedImage(data.thumbnail);
-      })
-      .catch(error => console.error('Error fetching product details:', error));
-  }, [id]);
+      } else {
+        console.error('Error fetching product details:', data);
+      }
+    } catch (error) {
+      console.error('Error fetching product details:', error);
+    }
+  };
+
+  loadProductDetails();
+}, [id]);
+
 
   const handleAddToCart = () => {
     const newItem = {

@@ -48,7 +48,7 @@ function Navbar() {
 
             {/* Search Icon (clickable, opens overlay) */}
             <div className='flex items-center gap-1 lg:gap-2.5'>
-              <button onClick={openSearchOverlay} className="bg-[#EFF0F2] flex items-center text-sm gap-1 text-[#919191] w-[120px] pl-[17px] py-[9px] rounded-full">
+              <button onClick={openSearchOverlay} className="bg-[#EFF0F2] flex items-center text-sm gap-1 text-[#919191] w-[135px] pl-[17px] py-[9px] rounded-full">
                  Search
               </button>
             </div>

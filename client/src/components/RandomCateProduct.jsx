@@ -53,7 +53,7 @@ const RandomCateProduct = () => {
           <Link
             key={product.id}
             to={`/product/${product.id}`}  // Create a dynamic link to ProductDetails
-            className="w-[160px] bg-white flex flex-col flex-shrink-0 px-4 rounded-md"
+            className="w-[150px] bg-white flex flex-col flex-shrink-0 px-4 rounded-md"
           >
             {/* Product image */}
             <div className='flex items-center justify-center'>
@@ -66,9 +66,9 @@ const RandomCateProduct = () => {
             {/* Product details */}
             <h3 className="text-sm font-medium">{product.title}</h3>
             <div className='flex flex-col justify-between pb-1'>
-              <p className="text-lg text-black font-bold mt-1">₦{product.price}</p>
+              <p className="text-base text-black font-bold mt-1">₦{product.price}</p>
               {/* Display stock (items left) */}
-              <p className="text-sm text-gray-500">{product.stock} items left</p>
+              <p className="text-xs text-gray-500">{product.stock} items left</p>
             </div>
           </Link>
         ))}

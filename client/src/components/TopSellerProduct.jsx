@@ -26,23 +26,23 @@ function TopSellerProduct() {
             to={`/product/${item.id}`}  // Use Link to navigate to product detail page
             key={item.id}
           >
-            <div className="bg-[#F9F9E6] rounded-[10px] w-[285px] lg:w-auto">
+            <div className="bg-[#F9F9E6] rounded-[10px] w-[150px] lg:w-auto">
               {/* Image Section */}
-              <div className="rounded-t-[10px] bg-[#FCC945] p-2">
+              <div className="rounded-t-[10px] items-center flex justify-center bg-[#FCC945] p-2">
                 <img
                   src={item.thumbnail}
                   alt={item.title}
-                  className="w-full h-40 object-cover"
+                  className="w-[100px] h-20 object-cover"
                 />
               </div>
 
               {/* Card Info Section */}
-              <div className="p-4 rounded-b-[10px]">
-                <h2 className="font-bold leading-[22px] text-lg mb-2">{item.title}</h2>
-                <p title={item.description} className="text-sm text-black mb-2">
-                  {truncateText(item.description, 50)}
-                </p>
-                <p className="font-bold text-lg">${item.price}</p>
+              <div className="p-2 rounded-b-[10px]">
+                <h2 className="font-medium leading-[15px] text-sm mb-1">{item.title}</h2>
+                {/* <p title={item.description} className="text-sm text-black mb-1">
+                  {truncateText(item.description, 30)}
+                </p> */}
+                <p className="font-bold text-base">${item.price}</p>
               </div>
             </div>
           </Link>

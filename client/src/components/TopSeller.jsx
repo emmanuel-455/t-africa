@@ -14,7 +14,7 @@ function TopSeller() {
           <h1 className='font-[700] text-[24px] lg:text-[48px]'>
             Discover Nigeria’s Best Exports
           </h1>
-          <p className='text-base text-black opacity-70 leading-relaxed max-w-[80%]'>
+          <p className='text-base text-black opacity-70 leading-relaxed max-w-[100%]'>
             Explore a curated selection of top-selling Nigerian products across various categories.
           </p>
         </div>
