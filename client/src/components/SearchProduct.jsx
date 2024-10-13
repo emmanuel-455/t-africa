@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../utils/api';
 import { useAtom } from 'jotai';
 import { ratingFilterAtom, minPriceAtom, maxPriceAtom, cartAtom } from '../redux/Store';
+import Filter from './Filter';
 
 function SearchProduct() {
   const location = useLocation();
@@ -118,23 +119,23 @@ function SearchProduct() {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl mb-6 font-bold">Showing results for "{searchQuery}"</h2>
-
+      <h2 className="text-lg mb-5 font-bold">Showing results for "{searchQuery}"</h2>
+      <div className='items-center mb-3'><Filter /></div>
       {products.length ? (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map((product) => (
             <div key={product.id} className="flex flex-col rounded-t-lg bg-white overflow-hidden">
-              <Link to={`/product/${product.id}`} className="w-full h-[8rem] bg-[#E0E5EB]">
-                <img src={product.thumbnail} alt={product.title} className="p-2 w-full h-full object-cover" />
+              <Link to={`/product/${product.id}`} className="w-full h-[6rem] bg-[#E0E5EB]">
+                <img src={product.thumbnail} alt={product.title} className="p-2 w-[130px] h-full object-cover m-auto" />
               </Link>
               <div className="px-4 py-2">
-                <h3 className="text-base font-semibold mb-1">{product.title}</h3>
-                <p className="text-black font-bold mb-1">₦{product.price}</p>
+                <h3 className="text-sm leading-[18px] font-semibold">{product.title}</h3>
+                <p className="text-black text-base my-1            font-bold">₦{product.price}</p>
                 <p className="text-sm text-gray-600">Min. order: {product.minimumOrderQuantity} pieces</p>
               </div>
               <button
                 onClick={() => handleButtonClick(product)}
-                className="text-sm py-2 text-white bg-green-500 w-full font-medium hover:bg-green-400"
+                className="text-sm py-[6px] text-white bg-brandGreen w-full font-medium hover:bg-green-800 rounded-b-lg"
               >
                 Add to cart
               </button>

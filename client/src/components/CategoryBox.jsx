@@ -49,7 +49,7 @@
             </Link>
           ))
         ) : (
-          <p>Loading categories...</p>
+            null
         )}
       </div>
     );

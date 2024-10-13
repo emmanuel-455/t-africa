@@ -29,7 +29,7 @@ const NewArrival = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading new arrivals...</div>;
+    return null;
   }
 
   if (error) {
