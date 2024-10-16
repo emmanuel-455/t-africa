@@ -17,6 +17,8 @@ import SearchResults from './components/SearchResults';
 import ViewCart from './pages/ViewCart/ViewCart';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
+import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
+import OrderConfirmation from './pages/OrderConfirmation/OrderConfirmation';
 
 // Layout component for consistent layout across pages
 function Layout() {
@@ -48,6 +50,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
           </Route>
+          <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
 
           {/* Routes outside the main layout (e.g., login/signup pages) */}
           <Route path="/signin" element={<Login />} />

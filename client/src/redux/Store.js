@@ -36,3 +36,5 @@ export const minOrderAtom = atom('');
 export const minPriceAtom = atom(null); // To store minimum price
 export const maxPriceAtom = atom(null); // To store maximum price
 
+
+

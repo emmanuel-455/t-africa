@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; 
-import { useAtom } from 'jotai'; 
-import { cartAtom } from '../../redux/Store'; 
-import Cart from "../../assets/cart.svg"; 
-import Cart2 from "../../assets/cart2.svg"; 
-import { fetchProducts } from '../../utils/api';  // Import the fetchProducts API
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { cartAtom } from '../../redux/Store';
+import Cart from "../../assets/cart.svg";
+import Cart2 from "../../assets/cart2.svg";
+import { fetchProducts } from '../../utils/api';
+import { Link } from 'react-router-dom';// Import the fetchProducts API
 
 function ProductDetails() {
   const { id } = useParams();  // Get the product id from the URL
-  const [quantity, setQuantity] = useState(1); 
+  const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(''); 
-  const [cartItems, setCartItems] = useAtom(cartAtom); 
+  const [selectedImage, setSelectedImage] = useState('');
+  const [cartItems, setCartItems] = useAtom(cartAtom);
   const [reviews, setReviews] = useState([]);  // State to hold reviews
   const [newReview, setNewReview] = useState(''); // State to hold new review input
   const [reviewRating, setReviewRating] = useState(0); // State to hold review rating
+  const [relatedProducts, setRelatedProducts] = useState([]); // State to hold related products
   const navigate = useNavigate();
 
   const user = true;  // Assuming user is logged in (you can adjust this based on your auth logic)
@@ -30,6 +32,11 @@ function ProductDetails() {
           setProduct(data);
           setSelectedImage(data.thumbnail);
           setReviews(data.reviews || []);  // Assuming reviews are part of the API response
+
+          // Fetch related products by category
+          const relatedResponse = await fetch(`https://dummyjson.com/products/category/${data.category}`);
+          const relatedData = await relatedResponse.json();
+          setRelatedProducts(relatedData.products.filter(p => p.id !== data.id)); // Exclude the current product from related
         } else {
           console.error('Error fetching product details:', data);
         }
@@ -41,13 +48,18 @@ function ProductDetails() {
     loadProductDetails();
   }, [id]);
 
+  // Scroll to top on product ID change
+  useEffect(() => {
+    window.scrollTo(0, 0);  // Scroll to the top of the page when id changes
+  }, [id]);
+
   const handleAddToCart = () => {
     const newItem = {
-      id: product.id, 
-      name: product.title, 
+      id: product.id,
+      name: product.title,
       price: product.price,
-      quantity, 
-      image: selectedImage, 
+      quantity,
+      image: selectedImage,
     };
 
     setCartItems(prevItems => {
@@ -67,7 +79,7 @@ function ProductDetails() {
     if (user) {
       handleAddToCart();
     } else {
-      navigate('/signin'); 
+      navigate('/signin');
     }
   };
 
@@ -127,7 +139,7 @@ function ProductDetails() {
       <div className="w-full lg:w-2/3 flex flex-col gap-2">
         {/* Product Title */}
         <h1 className="text-xl">{product.title}</h1>
-        
+
         {/* Pricing Section */}
         <div className="rounded-lg">
           <div className="text-lg font-bold text-[#1F2937] flex items-center space-x-2">
@@ -137,7 +149,7 @@ function ProductDetails() {
           </div>
           <p className="text-sm text-[#9CA3AF]">Minimum Order: 1 piece</p>
         </div>
-        
+
         {/* Rating */}
         <div className="flex items-center text-yellow-500">
           {[...Array(5)].map((_, index) => (
@@ -190,7 +202,7 @@ function ProductDetails() {
         {/* Review Section */}
         <div className="border-t pt-4 mt-4">
           <h2 className="text-lg font-semibold mb-2">Customer Reviews</h2>
-          
+
           {/* Display existing reviews */}
           {reviews.length > 0 ? (
             reviews.map((review, index) => (
@@ -207,43 +219,57 @@ function ProductDetails() {
               </div>
             ))
           ) : (
-            <p>No reviews yet. Be the first to review!</p>
+            <p>No reviews yet.</p>
           )}
 
-          {/* Add a new review (if user is logged in) */}
-          {user && (
-            <div className="mt-4">
-              <h3 className="font-semibold text-base mb-2">Leave a Review</h3>
-              <div className="flex flex-col space-y-2">
-                <div className="flex items-center">
-                  <span className="mr-2">Your Rating:</span>
-                  {[...Array(5)].map((_, i) => (
-                    <span
-                      key={i}
-                      className={`text-xl cursor-pointer ${i < reviewRating ? 'text-yellow-500' : 'text-gray-300'}`}
-                      onClick={() => setReviewRating(i + 1)}
-                    >
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <textarea
-                  value={newReview}
-                  onChange={(e) => setNewReview(e.target.value)}
-                  placeholder="Write your review here"
-                  className="border p-2 rounded-md w-full"
-                  rows="3"
-                />
-                <button
-                  onClick={handleSubmitReview}
-                  className="bg-green-500 text-white font-medium py-2 px-4 rounded-md"
+          {/* Submit new review */}
+          <div className="mt-4">
+            <h3 className="font-semibold">Add a Review</h3>
+            <textarea
+              value={newReview}
+              onChange={(e) => setNewReview(e.target.value)}
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+              placeholder="Write your review..."
+            />
+            <div className="flex items-center mt-2">
+              <span className="mr-2">Rating:</span>
+              {[...Array(5)].map((_, index) => (
+                <span
+                  key={index}
+                  className={`text-lg cursor-pointer ${index < reviewRating ? 'text-yellow-500' : 'text-gray-300'}`}
+                  onClick={() => setReviewRating(index + 1)}
                 >
-                  Submit Review
-                </button>
-              </div>
+                  ★
+                </span>
+              ))}
             </div>
-          )}
+            <button
+              onClick={handleSubmitReview}
+              className="mt-2 px-4 py-2 bg-brandGreen text-white rounded-md"
+            >
+              Submit Review
+            </button>
+          </div>
         </div>
+
+        {/* Related Products Section */}
+        <div className="border-t pt-4 mt-4">
+          <h2 className="text-lg font-semibold mb-2">Related Products</h2>
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+            {relatedProducts.map((relatedProduct) => (
+              <Link 
+                key={relatedProduct.id} 
+                to={`/product/${relatedProduct.id}`}  // Wrap the entire product card in Link
+                className="bg-white p-4 rounded-md block hover:shadow-lg transition-shadow"
+              >
+                <img src={relatedProduct.thumbnail} alt={relatedProduct.title} className="w-[70%] object-cover m-auto mb-2" />
+                <h3 className="text-base font-semibold">{relatedProduct.title}</h3>
+                <p className="text-sm text-gray-700">Price: US$ {relatedProduct.price}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );

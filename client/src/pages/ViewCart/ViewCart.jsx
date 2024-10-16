@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { cartAtom } from '../../redux/Store.js';  // Import the cart atom
+import { cartAtom } from '../../redux/Store';  // Adjust the path as needed
+import { Link } from 'react-router-dom';
 import Trash from '../../assets/trash.svg';
 
 const ViewCart = () => {
@@ -39,24 +40,24 @@ const ViewCart = () => {
   };
 
   return (
-    <div className="p-4 pr-[196px] pl-[174px] flex gap-[50px]"> {/* Flex container for the cart and checkout sections */}
+    <div className="container mx-auto p-4 flex flex-col lg:flex-row gap-8">
       
       {/* Cart section on the left */}
-      <div className="w-3/4">  {/* Adjust the width as needed */}
+      <div className="w-full lg:w-3/4">
         <h2 className="text-xl font-bold mb-4">Cart</h2>
         {cart.length > 0 ? (
-          <div className="flex flex-col gap-[15px]">
+          <div className="flex flex-col gap-4">
             {cart.map((item) => (
-              <div key={item.id} className="flex justify-between items-center pb-4">
+              <div key={item.id} className="flex justify-between items-center pb-4 border-b">
                 
-                <div className='bg-white w-[75px] h-[103px] flex items-center justify-center rounded-[5px]'>
+                <div className="bg-white w-[75px] h-[103px] flex items-center justify-center rounded-[5px]">
                   {/* Item image */}
                   <img src={item.image} alt={item.name} className="w-16 h-16 object-cover" />
                 </div>
                 
                 {/* Item details */}
                 <div className="flex-1 ml-4">
-                  <p className='font-bold tetx-base'>${item.price}</p>
+                  <p className="font-bold text-base">${item.price}</p>
                   <h3 className="text-base">{item.name}</h3>
                   <div className="flex items-center gap-4 mt-2">
                     <button
@@ -88,12 +89,21 @@ const ViewCart = () => {
         ) : (
           <p>Your cart is empty.</p>
         )}
+
+        {/* Proceed to Checkout */}
+        {cart.length > 0 && (
+          <div className="mt-6 flex justify-end">
+            <Link to="/checkout" className="bg-brandGreen hover:bg-green-700 text-white py-2 px-4 rounded-md font-semibold">
+              Proceed to Checkout
+            </Link>
+          </div>
+        )}
       </div>
 
-      {/* Checkout section on the right */}
-      <div className="w-[339px] static p-4 rounded-md h-fit">  {/* Adjust the width as needed */}
+      {/* Checkout summary on the right */}
+      <div className="w-full lg:w-1/4 p-4 rounded-md bg-gray-100 h-fit">
         <h3 className="text-lg font-bold mb-4">Summary</h3>
-        <div className='flex flex-col gap-[16px]'>
+        <div className="flex flex-col gap-4">
           <div className="flex justify-between">
             <p>Total:</p>
             <p>${totalPrice.toFixed(2)}</p>
@@ -102,19 +112,16 @@ const ViewCart = () => {
             <p>Delivery:</p>
             <p>${deliveryFee.toFixed(2)}</p>
           </div>
-          <div className="flex border-t justify-between font-bold">
-            <p></p>
+          <div className="flex border-t mb-5 justify-between font-bold">
+            <p>Total Amount:</p>
             <p>${(totalPrice + deliveryFee).toFixed(2)}</p>
           </div>
         </div>
 
         {/* Checkout Button */}
-        <button
-          className="mt-1 text-base w-full bg-[#06C569] text-white py-2 rounded-md font-bold"
-          onClick={() => alert('Proceeding to Checkout')}
-        >
+        <Link to="/checkout" className="px-3 text-base w-full bg-[#06C569] hover:bg-green-700 text-white py-2 rounded-md font-bold">
           Checkout
-        </button>
+        </Link>
       </div>
     </div>
   );
