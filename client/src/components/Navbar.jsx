@@ -1,3 +1,4 @@
+// src/components/Navbar.js
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from "../assets/T-LOGO.svg";
@@ -10,7 +11,7 @@ import MessageDropdown from './MessageDropdown'; // Import the MessageDropdown c
 import SearchOverlay from './SearchOverlay'; // Import the SearchOverlay component
 
 function Navbar() {
-  const user = true;
+  const user = true; // This should be managed properly in a real application
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
   const [isSearchOpen, setIsSearchOpen] = useState(false); // State to track the search overlay
 
@@ -31,10 +32,16 @@ function Navbar() {
     setIsSearchOpen(false);
   };
 
+  // Close the mobile menu
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <div className='bg-white'>
       {user ? (
         <div className='flex justify-between items-center px-[16px] lg:px-[100px] md:py-[20px] py-[14px]'>
+
           <div className='flex gap-2 lg:gap-[24px] flex-row items-center'>
             <Link className='w-[110px]' to="./">
               <img src={Logo} alt="Logo" />
@@ -48,8 +55,8 @@ function Navbar() {
 
             {/* Search Icon (clickable, opens overlay) */}
             <div className='flex items-center gap-1 lg:gap-2.5'>
-              <button onClick={openSearchOverlay} className="bg-[#EFF0F2] flex items-center text-sm gap-1 text-[#919191] w-[135px] pl-[17px] py-[9px] rounded-full">
-                 Search
+              <button onClick={openSearchOverlay} className="bg-[#EFF0F2] flex items-center text-sm gap-1 text-[#919191] w-[135px] pl-[17px] py-[9px] rounded-full" aria-label="Open search overlay">
+                Search
               </button>
             </div>
           </div>
@@ -62,35 +69,42 @@ function Navbar() {
             </Link>
 
             <MessageDropdown />
-
             <CartDropdown />
-
             <img className="block lg:hidden cursor-pointer" src={Menu} alt="Menu" onClick={toggleMobileMenu} />
           </div>
         </div>
       ) : (
-          // For logged-out users
-          <div className='px-[100px] py-[14px]'>
+        // For logged-out users
+        <div className='px-[16px] lg:px-[100px] py-[14px]'>
           <div className='flex justify-between items-center'>
             <Link to="/">
-              <img src={Logo} alt="T-Africa Logo" />
+              <img src={Logo} alt="T-Africa Logo" className="w-[80px] lg:w-[110px]" />
             </Link>
 
             <div className='flex items-center gap-3 font-medium justify-between'>
-              <ul className='flex gap-[12px] text-sm'>
+              <ul className='hidden lg:flex gap-[12px] text-sm'>
                 {/* Add your categories here */}
               </ul>
-              <div className='flex gap-[12px] text-sm'>
-                <div className='flex font-medium gap-[12px] flex-row items-center'>
-                  <Link to="/about" onClick={closeCart}>About</Link>
-                  <Link to="/contact" onClick={closeCart}>Contact</Link>
-                </div>
-                <button className='rounded-[10px] px-[10px] py-[6px] bg-[#EFF0F2] border border-[#E0E5EB]'>
+
+              <div className='flex gap-[8px] lg:gap-[12px] items-center'>
+                {/* Links */}
+                <div className='flex items-center gap-1 lg:gap-2.5'>
+              <button onClick={openSearchOverlay} className="bg-[#EFF0F2] flex items-center text-sm gap-1 text-[#919191] w-[135px] pl-[17px] py-[9px] rounded-full" aria-label="Open search overlay">
+                Search
+              </button>
+            </div>
+
+                {/* Sign Up and Log In Buttons */}
+                  <Link to="./signup">
+                  <button className='rounded-[10px] px-[10px] py-[6px] bg-[#EFF0F2] border border-[#E0E5EB] text-sm lg:text-base'>
                   Sign Up
                 </button>
-                <button className='rounded-[10px] bg-green-500 text-white px-[10px] py-[6px]'>
+                  </Link>
+                  <Link to="./signin">
+                  <button className='rounded-[10px] bg-green-500 text-white px-[10px] py-[6px] text-sm lg:text-base'>
                   Log In
                 </button>
+                  </Link>
               </div>
             </div>
           </div>
@@ -100,9 +114,9 @@ function Navbar() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className='lg:hidden px-4 py-4 bg-gray-100'>
-          <Link to="/about" onClick={toggleMobileMenu} className='block py-2'>About</Link>
-          <Link to="/contact" onClick={toggleMobileMenu} className='block py-2'>Contact</Link>
-          <Link to="/profile" onClick={toggleMobileMenu} className='block py-2'>Profile</Link>
+          <Link to="/about" onClick={closeMobileMenu} className='block py-2'>About</Link>
+          <Link to="/contact" onClick={closeMobileMenu} className='block py-2'>Contact</Link>
+          <Link to="/profile" onClick={closeMobileMenu} className='block py-2'>Profile</Link>
         </div>
       )}
 

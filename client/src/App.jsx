@@ -19,6 +19,7 @@ import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import OrderConfirmation from './pages/OrderConfirmation/OrderConfirmation';
+import Profile from './pages/Profile/Profile';
 
 // Layout component for consistent layout across pages
 function Layout() {
@@ -49,6 +50,7 @@ function App() {
             <Route path="/purchaseList" element={<ViewCart />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
