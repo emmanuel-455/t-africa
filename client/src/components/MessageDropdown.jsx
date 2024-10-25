@@ -34,7 +34,7 @@ const MessageDropdown = () => {
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute right-[-100px] md:right-auto md:left-0 mt-2 w-[80vw] md:w-[320px] bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+        <div className="absolute right-[-30px] mt-2 w-[80vw] md:w-[320px] bg-white border border-gray-300 rounded-lg shadow-lg z-50">
           <div className='p-4 border-b'>
             <h3 className='text-lg md:text-base font-semibold'>Messages</h3>
           </div>

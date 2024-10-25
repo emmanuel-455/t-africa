@@ -95,7 +95,7 @@ const Cart = ({ isCartOpen, closeCart }) => {
           <Link onClick={closeCart} to="/purchaseList" className="w-full font-base flex font-bold justify-center items-center py-2 bg-[#E0E5EB] text-[#1F2937] rounded-[10px]">
             View Cart
           </Link>
-          <button className="w-full text-base font-bold py-2 bg-[#06C569] text-white rounded-[10px]">Checkout</button>
+          <Link to="./checkout" className="w-full flex items-center justify-center text-base font-bold py-2 bg-[#06C569] text-white rounded-[10px]">Checkout</Link>
         </div>
       </div>
     </div>

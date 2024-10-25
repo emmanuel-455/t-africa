@@ -43,7 +43,7 @@ const RandomCateProduct = () => {
   }
 
   return (
-    <div className="px-2 mb-16">
+    <div className="px-2 lg:pl-[100px] mb-16">
       <h2 className="text-lg pl-3 rounded-sm py-1 font-bold bg-[#E6F9F0] text-black mb-2">
         {randomCategory ? `${randomCategory}` : 'Random Category Products'}
       </h2>

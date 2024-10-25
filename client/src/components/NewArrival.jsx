@@ -37,7 +37,7 @@ const NewArrival = () => {
   }
 
   return (
-    <div className="px-2 mb-[2rem]">
+    <div className="px-2 lg:pl-[100px] mb-[2rem]">
       <h2 className="text-lg pl-3 rounded-sm py-1 font-bold bg-[#E6F9F0] text-black mb-2">New Arrivals</h2>
       {/* Horizontal scroll container for mobile */}
       <div className="flex space-x-4 overflow-x-auto">

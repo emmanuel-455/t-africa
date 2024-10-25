@@ -28,7 +28,7 @@
 
 
     return (
-      <div className="grid grid-cols-4 mb-10 sm:grid-cols-3 md:grid-cols-4 gap-1 p-2">
+      <div className="grid lg:px-[100px] grid-cols-4 mb-10 sm:grid-cols-3 md:grid-cols-4 gap-1 p-2">
         {categories.length > 0 ? (
           categories.map((category, index) => (
             <Link to={`/search?query=${category}`}
