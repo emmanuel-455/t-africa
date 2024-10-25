@@ -11,7 +11,7 @@ import MessageDropdown from './MessageDropdown'; // Import the MessageDropdown c
 import SearchOverlay from './SearchOverlay'; // Import the SearchOverlay component
 
 function Navbar() {
-  const user = true; // This should be managed properly in a real application
+  const user = false; // This should be managed properly in a real application
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
   const [isSearchOpen, setIsSearchOpen] = useState(false); // State to track the search overlay
 
