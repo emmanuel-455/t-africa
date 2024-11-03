@@ -1,8 +1,7 @@
 // src/store/store.js
 import { atom } from 'jotai';
 
-// Atom for user state
-export const userAtom = atom(null); // null means no user is logged in initially
+export const isUserLoggedInAtom = atom(false);
 
 // Atom for cart state
 export const cartAtom = atom([]); // An empty array for cart items
