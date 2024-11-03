@@ -120,10 +120,10 @@ function ProductDetails() {
       {/* Product Details */}
       <div className="w-full lg:w-2/3 flex flex-col gap-2">
         <h1 className="text-2xl font-bold">{product.title}</h1>
-        <div className="">
+    
           
-          <p className="text-gray-700 w-[500px] text-sm mb-3">{product.description}</p>
-        </div>
+          <p className="text-gray-700 lg:w-[500px] text-sm mb-3">{product.description}</p>
+       
         <div className="rounded-lg">
           <div className="text-lg font-bold text-[#1F2937] flex items-center space-x-2">
             <span>US$ {product.price}</span>

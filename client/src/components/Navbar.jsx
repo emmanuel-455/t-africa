@@ -54,7 +54,7 @@ function Navbar() {
   };
 
   return (
-    <div className='bg-white'>
+    <div className='bg-white overflow-x-hidden'>
       <div className='flex justify-between items-center px-[16px] lg:px-[100px] md:py-[20px] py-[14px]'>
 
         {/* Left Side - Logo, About, Contact */}
