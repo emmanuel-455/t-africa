@@ -1,10 +1,8 @@
-// src/components/Navbar.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from "../assets/T-LOGO.svg";
 import Profile from "../assets/PP.png";
-import CartIcon from "../assets/cartIcon.svg";
-import Search from "../assets/SearchNav.svg";
+import SearchIcon from "../assets/SearchNav.svg";
 import CartDropdown from './Cart';
 import Menu from "../assets/MenuIcon.svg";
 import MessageDropdown from './MessageDropdown';
@@ -15,11 +13,18 @@ import { useAtom } from 'jotai';
 
 function Navbar() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useAtom(isUserLoggedInAtom);
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const navigate = useNavigate();
+
+  // Monitor window width to determine if the device is mobile
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(prevState => !prevState);
@@ -33,6 +38,21 @@ function Navbar() {
     setIsSearchOpen(false);
   };
 
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/search?query=${searchTerm}`);
+      setSearchTerm(''); // Clear the input after search
+    }
+  };
+
+  const handleSearchClick = () => {
+    if (isMobile) {
+      openSearchOverlay(); // Open overlay for mobile devices
+    } else {
+      handleSearch(); // Execute search for desktop
+    }
+  };
+
   return (
     <div className='bg-white'>
       <div className='flex justify-between items-center px-[16px] lg:px-[100px] md:py-[20px] py-[14px]'>
@@ -40,8 +60,32 @@ function Navbar() {
         {/* Left Side - Logo, About, Contact */}
         <div className='flex items-center gap-4'>
           <Link to="/">
-            <img src={Logo} alt="Logo" className="w-[80px] lg:w-[110px]" />
+            <img src={Logo} alt="Logo" className="w-[100px] lg:w-[110px]" />
           </Link>
+
+          {/* Search Input - Opens Overlay on Mobile, Direct Search on Desktop */}
+          <div className='flex items-center'>
+            <input
+              type="text"
+              placeholder="Search"
+              className="border border-gray-300 rounded-full px-4 py-2 w-[140px] lg:w-[300px] focus:outline-none"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onClick={isMobile ? openSearchOverlay : undefined} // Open overlay on mobile
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !isMobile) handleSearch();
+              }}
+            />
+            {!isMobile && ( // Show search button only for desktop
+              <button
+                onClick={handleSearchClick}
+                className="bg-[#EFF0F2] flex items-center text-sm gap-1 text-[#919191] px-[10px] py-[8px] rounded-full ml-2"
+                aria-label="Search"
+              >
+                <img src={SearchIcon} alt="Search" className="w-4 h-4" />
+              </button>
+            )}
+          </div>
 
           <div className='hidden lg:flex font-medium gap-4'>
             <Link to="/about">About</Link>
@@ -51,15 +95,6 @@ function Navbar() {
 
         {/* Right Side - Profile, Sign Up, etc. */}
         <div className='flex items-center gap-2'>
-          {/* Search Button for Mobile and Desktop */}
-          <button
-            onClick={openSearchOverlay}
-            className="bg-[#EFF0F2] flex items-center text-sm gap-1 text-[#919191] w-[100px] lg:w-[135px] px-[17px] py-[9px] rounded-full lg:mr-4"
-            aria-label="Open search overlay"
-          >
-            <span className=' text-black lg:inline'>Search</span>
-          </button>
-
           {isUserLoggedIn ? (
             <>
               <Link to="/profile" className='hidden lg:flex gap-[8px] font-bold items-center'>
@@ -70,14 +105,11 @@ function Navbar() {
               <CartDropdown />
             </>
           ) : (
-            <>
-              
-              <Link to="./signin">
-                <button className='rounded-[10px] bg-green-500 text-white text-nowrap px-[10px] py-[6px] text-sm lg:text-base'>
-                  sign In
-                </button>
-              </Link>
-            </>
+            <Link to="./signin">
+              <button className='rounded-full bg-brandGreen text-white font-semibold text-nowrap px-4 py-[8px] text-sm lg:text-base'>
+                Sign in
+              </button>
+            </Link>
           )}
 
           <img className="block lg:hidden cursor-pointer" src={Menu} alt="Menu" onClick={toggleMobileMenu} />
@@ -93,7 +125,7 @@ function Navbar() {
         </div>
       )}
 
-      {/* Search Overlay */}
+      {/* Search Overlay for Mobile */}
       {isSearchOpen && <SearchOverlay closeOverlay={closeSearchOverlay} />}
     </div>
   );

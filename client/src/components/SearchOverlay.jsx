@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SearchIcon from '../assets/SearchNav.svg'; // Assuming you have a search icon
-//import CloseIcon from '../assets/closeIcon.svg'; // A close icon for the overlay
+import SearchIcon from '../assets/SearchNav.svg';
+import CloseIcon from "../assets/closeIcon.svg";
 
 const SearchOverlay = ({ closeOverlay }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchHistory, setSearchHistory] = useState([]);
   const navigate = useNavigate();
+
+  // Check if the device is mobile
+  const isMobile = window.innerWidth < 768; // Adjust the breakpoint as needed
 
   useEffect(() => {
     // Retrieve search history from localStorage
@@ -36,13 +39,22 @@ const SearchOverlay = ({ closeOverlay }) => {
     }
   };
 
+  // Remove a specific search term from history
+  const handleRemoveSearchTerm = (termToRemove) => {
+    const updatedHistory = searchHistory.filter(term => term !== termToRemove);
+    setSearchHistory(updatedHistory);
+    localStorage.setItem('searchHistory', JSON.stringify(updatedHistory)); // Update localStorage
+  };
+
+  // Prevent the overlay from rendering on desktop
+  if (!isMobile) return null;
+
   return (
-    <div className="fixed inset-0 bg-white z-50 flex flex-col items-center px-4">
+    <div className="fixed inset-0 bg-white z-50 flex flex-col items-center p-4">
       <div className="flex justify-between items-center w-full">
         <h2 className="text-xl font-bold">Search</h2>
         <button onClick={closeOverlay} className='font-extrabold text-xl'>
-          {/* <img src={CloseIcon} alt="Close" className="w-6 h-6" /> */}
-          X
+          <img src={CloseIcon} alt="Close" className="w-6 h-6" />
         </button>
       </div>
 
@@ -67,12 +79,18 @@ const SearchOverlay = ({ closeOverlay }) => {
           <h3 className="font-bold">Recent Searches</h3>
           <ul className="mt-2">
             {searchHistory.map((term, index) => (
-              <li key={index} className="py-1">
+              <li key={index} className="flex justify-between items-center py-1">
                 <button className="text-blue-500" onClick={() => {
                   setSearchTerm(term);
                   handleSearch();
                 }}>
                   {term}
+                </button>
+                <button
+                  className="text-red-500 ml-2"
+                  onClick={() => handleRemoveSearchTerm(term)}
+                >
+                  Remove
                 </button>
               </li>
             ))}

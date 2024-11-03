@@ -143,7 +143,7 @@ function ProductDetails() {
 
         <div>
           <label className="block text-base font-medium text-[#1F2937]">Quantity</label>
-          <div className="flex justify-between items-center mt-2 bg-white space-x-2 border border-[#E0E5EB] w-full sm:w-[60%] md:w-[20%] mb-4 rounded-md py-2 px-4">
+          <div className="flex justify-between items-center mt-2 bg-white space-x-2 border border-[#E0E5EB] w-[170px] sm:w-[60%] md:w-[20%] mb-4 rounded-md py-2 px-4">
             <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="font-bold text-xl">
               -
             </button>
