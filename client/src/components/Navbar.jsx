@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FiSearch } from 'react-icons/fi'; // Import search icon from react-icons
 import Logo from "../assets/T-LOGO.svg";
 import Profile from "../assets/PP.png";
-import SearchIcon from "../assets/SearchNav.svg";
 import CartDropdown from './Cart';
 import Menu from "../assets/MenuIcon.svg";
 import MessageDropdown from './MessageDropdown';
@@ -12,7 +12,7 @@ import { isUserLoggedInAtom } from '../redux/Store';
 import { useAtom } from 'jotai';
 
 function Navbar() {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useAtom(isUserLoggedInAtom);
+  const [isUserLoggedIn] = useAtom(isUserLoggedInAtom);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,51 +45,51 @@ function Navbar() {
     }
   };
 
-  const handleSearchClick = () => {
-    if (isMobile) {
-      openSearchOverlay(); // Open overlay for mobile devices
-    } else {
-      handleSearch(); // Execute search for desktop
-    }
-  };
-
   return (
     <div className='bg-white overflow-x-hidden'>
       <div className='flex justify-between items-center px-[16px] lg:px-[100px] md:py-[20px] py-[14px]'>
 
         {/* Left Side - Logo, About, Contact */}
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-2 lg:gap-8'>
           <Link to="/">
             <img src={Logo} alt="Logo" className="w-[100px] lg:w-[110px]" />
           </Link>
-
-          {/* Search Input - Opens Overlay on Mobile, Direct Search on Desktop */}
-          <div className='flex items-center'>
-            <input
-              type="text"
-              placeholder="Search"
-              className="border border-gray-300 rounded-full px-4 py-2 w-[140px] lg:w-[300px] focus:outline-none"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onClick={isMobile ? openSearchOverlay : undefined} // Open overlay on mobile
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !isMobile) handleSearch();
-              }}
-            />
-            {!isMobile && ( // Show search button only for desktop
-              <button
-                onClick={handleSearchClick}
-                className="bg-[#EFF0F2] flex items-center text-sm gap-1 text-[#919191] px-[10px] py-[8px] rounded-full ml-2"
-                aria-label="Search"
-              >
-                <img src={SearchIcon} alt="Search" className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-
+          
           <div className='hidden lg:flex font-medium gap-4'>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
+          </div>
+
+          {/* Search Icon for Mobile / Input for Desktop */}
+          <div className='flex items-center'>
+            {isMobile ? (
+              <button
+                onClick={openSearchOverlay} // Open overlay for mobile
+                className="p-2 rounded-full text-gray-500"
+              >
+                <FiSearch size={20} /> {/* Search icon */}
+              </button>
+            ) : (
+              <div className='flex items-center'>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="border border-gray-300 rounded-full px-4 py-[6px] w-[300px] focus:outline-none"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSearch();
+                  }}
+                />
+                <button
+                  onClick={handleSearch}
+                  className="bg-brandGreen flex items-center text-sm gap-1 text-[#fff] font-bold px-[10px] py-[10px] rounded-full ml-2"
+                  aria-label="Search"
+                >
+                  <FiSearch size={16} /> {/* Small search icon for desktop */}
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
