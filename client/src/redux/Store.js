@@ -1,7 +1,7 @@
 // src/store/store.js
 import { atom } from 'jotai';
 
-export const isUserLoggedInAtom = atom(false);
+export const isUserLoggedInAtom = atom(true);
 
 // Atom for cart state
 export const cartAtom = atom([]); // An empty array for cart items

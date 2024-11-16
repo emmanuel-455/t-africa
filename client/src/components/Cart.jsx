@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Trash from '../assets/trash.svg';
 import Check from "../assets/Check.svg";
-import CartIcon from "../assets/cartIcon.svg"; // Import the cart icon
+import CartIcon from "../assets/cartIcon.svg";
 import { cartAtom } from '../redux/Store';
 import { useAtom } from 'jotai';
 
 // Utility function to store cart items in localStorage
 const storeCartItems = (cartItems) => {
   localStorage.setItem('cart', JSON.stringify(cartItems));
+  console.log("Items stored in localStorage:", cartItems); // Log items stored in localStorage
 };
 
 // Utility function to retrieve cart items from localStorage
@@ -17,16 +18,20 @@ const getStoredCartItems = () => {
   return storedItems ? JSON.parse(storedItems) : [];
 };
 
+// Main Cart Component
 const Cart = ({ isCartOpen, closeCart }) => {
   const [cartItems, setCartItems] = useAtom(cartAtom);
 
+  // Load cart items from localStorage on component mount
   useEffect(() => {
     const storedItems = getStoredCartItems();
     if (storedItems.length > 0) {
       updateCartItemsWithImages(storedItems);
+      console.log("Loaded items from localStorage:", storedItems); // Log loaded items
     }
   }, [setCartItems]);
 
+  // Update cart items with placeholder images if necessary
   const updateCartItemsWithImages = (items) => {
     const updatedItems = items.map((item) => ({
       ...item,
@@ -35,15 +40,21 @@ const Cart = ({ isCartOpen, closeCart }) => {
     setCartItems(updatedItems);
   };
 
+  // Store cart items in localStorage whenever cartItems changes
   useEffect(() => {
     storeCartItems(cartItems);
   }, [cartItems]);
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
+  // Remove item from cart
   const handleRemoveItem = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    const updatedItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedItems);
+    console.log("Item removed, updated cart:", updatedItems); // Log updated cart after removal
   };
+
+  if (!isCartOpen) return null;
 
   return (
     <div className="absolute top-full z-50 right-0 mt-2 bg-white shadow-md rounded-lg p-4 w-[345px]">
@@ -74,7 +85,6 @@ const Cart = ({ isCartOpen, closeCart }) => {
                 <div className="flex items-center gap-2">
                   <p className="text-sm">Quantity: {item.quantity}</p>
                 </div>
-
                 <button className="text-red-500" onClick={() => handleRemoveItem(item.id)}>
                   <img src={Trash} alt="Remove" />
                 </button>
@@ -102,11 +112,12 @@ const Cart = ({ isCartOpen, closeCart }) => {
   );
 };
 
+// CartDropdown Component
 const CartDropdown = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useAtom(cartAtom); // Using cartAtom for cart items
+  const [cartItems, setCartItems] = useAtom(cartAtom);
 
-  // Fetch cart items from localStorage on mount
+  // Load stored cart items on mount
   useEffect(() => {
     const storedItems = getStoredCartItems();
     if (storedItems.length > 0) {

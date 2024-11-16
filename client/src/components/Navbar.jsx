@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi'; // Import search icon from react-icons
 import Logo from "../assets/T-LOGO.svg";
@@ -46,7 +46,7 @@ function Navbar() {
   };
 
   return (
-    <div className='bg-white overflow-x-hidden'>
+    <div className='bg-white z-0'>
       <div className='flex justify-between items-center px-[16px] lg:px-[100px] md:py-[20px] py-[14px]'>
 
         {/* Left Side - Logo, About, Contact */}

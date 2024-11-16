@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Message from "../assets/messageIcon.svg"; // Import the message icon
 
@@ -18,7 +18,7 @@ const MessageDropdown = () => {
   ];
 
   return (
-    <div className="relative">
+    <div>
       <button 
         className='flex py-[6px] font-medium cursor-pointer text-[14px] gap-[8px]' 
         onClick={toggleDropdown} // Dropdown toggles on click
@@ -34,7 +34,7 @@ const MessageDropdown = () => {
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute right-[-30px] mt-2 w-[80vw] md:w-[320px] bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+        <div className="absolute lg:right-[150px] right-[4px] mt-2 w-[80vw] md:w-[320px] bg-white border border-gray-300 rounded-lg shadow-lg z-50">
           <div className='p-4 border-b'>
             <h3 className='text-lg md:text-base font-semibold'>Messages</h3>
           </div>

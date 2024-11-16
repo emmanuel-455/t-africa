@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { cartAtom, isUserLoggedInAtom } from '../../redux/Store';
@@ -15,7 +15,7 @@ function ProductDetails() {
   const [newReview, setNewReview] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useAtom(isUserLoggedInAtom);
+  const [isUserLoggedIn] = useAtom(isUserLoggedInAtom);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,11 +56,17 @@ function ProductDetails() {
       image: selectedImage,
     };
 
-    setCartItems(prevItems => {
-      const itemExists = prevItems.find(item => item.id === product.id);
-      return itemExists
-        ? prevItems.map(item => item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item)
+    setCartItems((prevItems) => {
+      const itemExists = prevItems.find((item) => item.id === product.id);
+      const updatedCart = itemExists
+        ? prevItems.map((item) => 
+            item.id === product.id 
+              ? { ...item, quantity: item.quantity + quantity }
+              : item
+          )
         : [...prevItems, newItem];
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Sync with localStorage
+      return updatedCart;
     });
   };
 
@@ -79,7 +85,7 @@ function ProductDetails() {
       user: "John Doe",
     };
 
-    setReviews(prevReviews => [...prevReviews, newReviewObject]);
+    setReviews((prevReviews) => [...prevReviews, newReviewObject]);
     setNewReview('');
     setReviewRating(0);
   };
@@ -120,9 +126,7 @@ function ProductDetails() {
       {/* Product Details */}
       <div className="w-full lg:w-2/3 flex flex-col gap-2">
         <h1 className="text-2xl font-bold">{product.title}</h1>
-    
-          
-          <p className="text-gray-700 lg:w-[500px] text-sm mb-3">{product.description}</p>
+        <p className="text-gray-700 lg:w-[500px] text-sm mb-3">{product.description}</p>
        
         <div className="rounded-lg">
           <div className="text-lg font-bold text-[#1F2937] flex items-center space-x-2">
@@ -173,7 +177,6 @@ function ProductDetails() {
           </button>
         </div>
 
-
         {/* Review Section */}
         <div className="border-t pt-4 mt-4">
           <h2 className="text-lg font-semibold mb-2">Customer Reviews</h2>
@@ -209,43 +212,23 @@ function ProductDetails() {
                 {[...Array(5)].map((_, index) => (
                   <span
                     key={index}
-                    className={`cursor-pointer text-lg ${index < reviewRating ? 'text-yellow-500' : 'text-gray-300'}`}
+                    className={`cursor-pointer ${index < reviewRating ? 'text-yellow-500' : 'text-gray-300'}`}
                     onClick={() => setReviewRating(index + 1)}
                   >
                     ★
                   </span>
                 ))}
               </div>
-              <button onClick={handleSubmitReview} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 mt-2 rounded-lg">
+              <button onClick={handleSubmitReview} className="bg-brandGreen hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg mt-2">
                 Submit Review
               </button>
             </div>
           ) : (
-            <Link to="/signin" className="mt-2 bg-white py-3 rounded-full px-5 text-blue-500 hover:underline">
+            <Link to="/signin" className="text-brandGreen hover:underline">
               Sign in to leave a review
             </Link>
           )}
         </div>
-
-        {/* Related Products Section */}
-        {relatedProducts.length > 0 && (
-          <div className="border-t pt-4 mt-4">
-            <h2 className="text-lg font-semibold mb-2">Related Products</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {relatedProducts.slice(0, 4).map((relatedProduct) => (
-                <Link to={`/product/${relatedProduct.id}`} key={relatedProduct.id} className="border p-2 rounded-lg hover:shadow-md">
-                  <img
-                    src={relatedProduct.thumbnail}
-                    alt={relatedProduct.title}
-                    className="w-full h-32 object-cover rounded-lg"
-                  />
-                  <h3 className="text-sm font-semibold mt-2">{relatedProduct.title}</h3>
-                  <p className="text-gray-500 text-sm">US$ {relatedProduct.price}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

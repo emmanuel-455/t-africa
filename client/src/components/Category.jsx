@@ -37,7 +37,7 @@ function Category() {
   return (
     <div className='flex lg:flex items-center justify-between lg:px-[100px] pb-[16px] bg-white'>
       {/* Dropdown Button */}
-      <div className='relative'>
+      <div>
         <button
           id="dropdownHoverButton"
           onClick={handleToggleDropdown} // Use click event to toggle dropdown
