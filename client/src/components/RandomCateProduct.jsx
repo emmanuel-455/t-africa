@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchProducts } from '../utils/api';  // Import the fetchProducts API function
 import { Link } from 'react-router-dom';  // Import Link for navigation
 
@@ -43,8 +43,8 @@ const RandomCateProduct = () => {
   }
 
   return (
-    <div className="px-2 lg:pl-[100px] mb-16">
-      <h2 className="text-lg pl-3 rounded-sm py-1 font-bold bg-[#E6F9F0] text-black mb-2">
+    <div className=" mb-16">
+      <h2 className="text-lg pl-3 rounded-sm py-1 font-bold bg-[#000] text-white mb-2">
         {randomCategory ? `${randomCategory}` : 'Random Category Products'}
       </h2>
       {/* Horizontal scroll container for mobile */}
@@ -53,14 +53,14 @@ const RandomCateProduct = () => {
           <Link
             key={product.id}
             to={`/product/${product.id}`}  // Create a dynamic link to ProductDetails
-            className="w-[150px] bg-white flex flex-col flex-shrink-0 px-4 rounded-md"
+            className="w-[200px] bg-white flex flex-col flex-shrink-0 px-4 rounded-md"
           >
             {/* Product image */}
             <div className='flex items-center justify-center'>
               <img
                 src={product.thumbnail}
                 alt={product.title}
-                className="w-[90px] object-cover rounded-md my-2"
+                className="w-[100%] object-cover rounded-md my-2"
               />
             </div>
             {/* Product details */}

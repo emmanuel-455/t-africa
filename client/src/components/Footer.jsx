@@ -1,10 +1,9 @@
-import React from 'react';
 import logo from '../assets/T-LOGO.svg';
 import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <div className='flex md:flex-row mt-[80px] flex-col md:pb-[80px] pb-[50px] lg:pb-[79px] lg:px-[160px] px-[39px] justify-between md:px-[100px] items-start'>
+    <div className='flex md:flex-row mt-[80px] flex-col md:pb-[80px] pb-[50px] lg:pb-[79px] justify-between items-start'>
       <div className='flex flex-col gap-6 md:mb-0 mb-[110px]'>
         <div className=''>
           <img src={logo} alt="Logo" />

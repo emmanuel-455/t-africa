@@ -1,5 +1,5 @@
 // src/App.jsx
-import React from 'react';
+
 import { Provider } from 'jotai'; // Jotai Provider for state management
 import { HashRouter as Router, Route, Routes, Outlet } from 'react-router-dom'; // Use HashRouter
 
@@ -25,11 +25,15 @@ import Profile from './pages/Profile/Profile';
 function Layout() {
   return (
     <div className="w-full flex flex-col min-h-screen">
+      <div>
       <Navbar />
+      </div>
+      <div className='lg:px-[160px]'>
       <div className="flex-grow">
         <Outlet />
       </div>
       <Footer />
+      </div>
     </div>
   );
 }

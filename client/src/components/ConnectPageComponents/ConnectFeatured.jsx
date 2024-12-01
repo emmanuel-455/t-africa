@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAtom } from 'jotai';
 import { selectedCategoryAtom } from '../../redux/Store'; 
 import { Link } from 'react-router-dom'; // Import Link for navigation
@@ -57,7 +56,7 @@ function ConnectFeatured() {
   };
 
   return (
-    <div className='w-full lg:px-[100px] mb-[159px] pt-[46px] md:pt-[54px] lg:pt-[80px]'>
+    <div className='w-full mb-[159px] pt-[46px] md:pt-[54px] lg:pt-[80px]'>
       <div className='flex flex-col w-full mx-auto items-center justify-center'>
         {/* Featured Categories Badge */}
         <span className='mb-4 font-medium md:mb-[18px] text-base md:text-lg px-3 py-2.5 bg-[#E6F9F0] text-brandGreen rounded'>

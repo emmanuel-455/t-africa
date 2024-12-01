@@ -1,9 +1,8 @@
-import React from 'react'
 import VerifiedSellerCard from './VerifiedSellerCard'
 
 function VerifiedSeller() {
   return (
-    <div  className='w-full lg:px-[100px] mb-[159px]'>
+    <div  className='w-full mb-[159px]'>
       <div className='flex flex-col w-full mx-auto items-center justify-center'>
       <span className='mb-[18px] text-lg px-3.5 py-2.5 bg-[#E6F9F0] text-brandGreen rounded'>
         Verified Suppliers

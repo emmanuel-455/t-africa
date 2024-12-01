@@ -1,27 +1,111 @@
-import React from 'react';
+import { FaPhoneAlt } from 'react-icons/fa';
+import { FaStore } from 'react-icons/fa';
+import { FaTags } from 'react-icons/fa';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Logo from "../../assets/T-LOGO.svg";
 
-function ConnectBanner() {
+const ConnectBanner = () => {
+  // Array of images for the slider
+  const bannerImages = [
+    {
+      src: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      caption: '40% off everything',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1526178613552-2b45c6c302f0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      caption: 'Discover amazing deals!',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1542992015-4a0b729b1385?q=80&w=2978&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      caption: 'Shop now and save big!',
+    },
+  ];
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
+
   return (
-    <div className='flex mb-14 flex-col lg:flex-row gap-4 lg:h-[400px] px-2 lg:px-[100px]'>
-      {/* Left Section */}
-      <div className='w-full lg:w-[70%] md:w-[60%] h-[150px] lg:h-full rounded-lg lg:rounded-[30px] bg-brandGreen'>
-        <p className='py-[30px] lg:py-[51px] px-[20px] lg:px-[40px] font-bold text-white text-2xl lg:text-4xl w-full lg:w-[308px]'>
-          40% off everything
-        </p>
+    <div className="flex mb-14 flex-col lg:flex-row gap-4 lg:h-[400px]">
+      {/* Left Section with Carousel */}
+      <div className="w-full lg:w-[70%] md:w-[60%] h-auto rounded-lg lg:rounded-[30px] overflow-hidden">
+        <Slider {...sliderSettings}>
+          {bannerImages.map((image, index) => (
+            <div key={index} className="w-full h-[400px] lg:h-[700px]">
+              <div
+                className="w-full h-full bg-no-repeat bg-center bg-cover"
+                style={{
+                  backgroundImage: `url("${image.src}")`,
+                }}
+              >
+                <div className="bg-black bg-opacity-50 h-full flex items-center justify-center">
+                  <p className="text-white text-2xl lg:text-4xl font-bold px-4 text-center">
+                    {image.caption}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Slider>
       </div>
 
       {/* Right Section */}
-      <div className='flex flex-row md:flex-col w-full lg:w-[30%] gap-4'>
+      <div className="flex flex-row md:flex-col w-full lg:w-[30%] gap-4">
         {/* First box */}
-        <div className='bg-[#EFF0F2] rounded-lg w-full h-[140px] lg:h-[219px] font-bold px-[20px] lg:px-[30px] py-[10px] lg:py-[37px]'>
-          <p className='text-[17px] lg:text-[20px] w-[full] lg:w-[165px]'>Start selling on T-Africa</p>
+        <div className="bg-[#fff] rounded-lg w-full h-[140px] lg:h-[219px]">
+          <ul className="mt-6 mx-6 flex flex-col gap-6">
+            {/* CALL TO ORDER */}
+            <li className="flex items-center gap-4">
+              <FaPhoneAlt size={24} className="text-brandGreen" />
+              <div>
+                <p className="font-semibold text-[16px]">CALL TO ORDER</p>
+                <p className="text-[14px] text-gray-600">
+                  <a href="tel:07084934850" className="hover:underline">
+                    07084934850
+                  </a>,{' '}
+                  <a href="tel:090839589385" className="hover:underline">
+                    090839589385
+                  </a>
+                </p>
+              </div>
+            </li>
+
+            {/* Sell on T-Africa */}
+            <li className="flex items-center gap-4">
+              <FaStore size={24} className="text-brandGreen" />
+              <div>
+                <p className="font-semibold text-[16px]">Sell on T-Africa</p>
+              </div>
+            </li>
+
+            {/* Best Deals */}
+            <li className="flex items-center gap-4">
+              <FaTags size={24} className="text-brandGreen" />
+              <div>
+                <p className="font-semibold text-[16px]">Best Deals</p>
+              </div>
+            </li>
+          </ul>
         </div>
 
         {/* Second box */}
-        <div className='bg-[#EFF0F2] rounded-lg w-full h-[140px] lg:h-[219px]' />
+        <div className="bg-brandGreen flex flex-col items-center justify-center rounded-lg w-full h-[140px] lg:h-[219px]">
+          <div className="bg-white px-2 rounded-lg">
+            <img className="w-[150px]" src={Logo} alt="Logo" />
+          </div>
+          <span className="text-white animate-bounceSlow font-bold text-2xl mt-3">JOIN NOW</span>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default ConnectBanner;

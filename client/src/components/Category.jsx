@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchProducts } from '../utils/api'; // Import your fetchProducts function
 import CateIcon from "../assets/hugeicons.svg";
 import { Link } from 'react-router-dom';
@@ -35,13 +35,13 @@ function Category() {
   };
 
   return (
-    <div className='flex lg:flex items-center justify-between lg:px-[100px] pb-[16px] bg-white'>
+    <div className='flex lg:flex items-center justify-between px-[20px] rounded-full py-[10px] bg-white'>
       {/* Dropdown Button */}
       <div>
         <button
           id="dropdownHoverButton"
           onClick={handleToggleDropdown} // Use click event to toggle dropdown
-          className="font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center"
+          className="font-medium rounded-lg text-sm py-2.5 inline-flex items-center"
         >
           <img src={CateIcon} alt="categories icon" className="mr-2" />
           All Categories
@@ -79,7 +79,7 @@ function Category() {
 
       {/* Help & Sell Button */}
       <div className='flex gap-[5px] mr-3'>
-        <div className='font-medium text-nowrap py-[6px] px-[10px] rounded-[10px] flex bg-[#EFF0F2]'>
+        <div className='font-medium text-nowrap py-[6px] rounded-[10px] flex bg-[#EFF0F2]'>
           <img src={Help} alt="help icon" />
           <p className='text-sm ml-[2px]'>Help</p>
         </div>

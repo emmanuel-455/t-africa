@@ -15,6 +15,10 @@ export default {
         // or
         // brandGreen: '#06C569', // Alternative name
       },
+      animation: {
+        bounceSlow: 'bounce 3s infinite',
+        pulseSlow: 'pulse 3s infinite',
+      },
     },
   },
   plugins: [],

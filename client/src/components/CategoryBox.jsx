@@ -28,24 +28,24 @@
 
 
     return (
-      <div className="grid lg:px-[100px] grid-cols-4 mb-10 sm:grid-cols-3 md:grid-cols-4 gap-1 p-2">
+      <div className="grid grid-cols-4 mb-10 sm:grid-cols-3 md:grid-cols-4 gap-1 p-2">
         {categories.length > 0 ? (
           categories.map((category, index) => (
             <Link to={`/search?query=${category}`}
               key={index} 
-              className="cursor-pointer rounded-lg border p-4 flex flex-col items-center hover:bg-gray-100 transition-all" 
+              className="cursor-pointer rounded-lg flex flex-col items-center transition-all" 
               
             >
               <img 
-                src={`https://source.unsplash.com/random/150x150?${category}`} // Assuming category images are stored with the same name as the category
+                src={`https://images.unsplash.com/photo-1624823183493-ed5832f48f18?q=80&w=2429&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`} // Assuming category images are stored with the same name as the category
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "https://via.placeholder.com/150"; // Fallback placeholder image
                 }}
                 alt={category}
-                className="w-16 h-16 object-cover mb-2"
+                className="w-[90%] rounded-xl object-cover mb-2"
               />
-              <p className="text-center font-semibold">{category}</p>
+              <p className="text-center text-[17px]">{category}</p>
             </Link>
           ))
         ) : (

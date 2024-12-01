@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAtom } from 'jotai';
 import { Link } from 'react-router-dom';
 import { productsAtom } from '../redux/Store';
@@ -7,7 +6,7 @@ function TopSellerProduct() {
   const [products] = useAtom(productsAtom);
 
   // Limit the products to the first four
-  const topSellerProducts = products.slice(0, 4);
+  const topSellerProducts = products.slice(0, 5);
 
   // Function to truncate text
   const truncateText = (text, maxLength) => {
@@ -20,13 +19,13 @@ function TopSellerProduct() {
   return (
     <div className="w-full overflow-x-auto lg:overflow-x-visible">
       {/* Use flex for small screens and grid for larger screens */}
-      <div className="flex lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pl-4  gap-4 lg:gap-[20px] mt-8 lg:mt-[48px] lg:w-full md:pl-[80px] lg:pl-0">
+      <div className="flex items-center justify-center pl-4 gap-4 lg:gap-[20px] mt-8 lg:mt-[48px] lg:w-full md:pl-[80px] lg:pl-0">
         {topSellerProducts.map((item) => (
           <Link
             to={`/product/${item.id}`}  // Use Link to navigate to product detail page
             key={item.id}
           >
-            <div className="bg-[#F9F9E6] rounded-[10px] w-[150px] lg:w-auto">
+            <div className="bg-[#F9F9E6] rounded-[10px] w-[200px] h-[180px]">
               {/* Image Section */}
               <div className="rounded-t-[10px] items-center flex justify-center bg-[#FCC945] p-2">
                 <img
