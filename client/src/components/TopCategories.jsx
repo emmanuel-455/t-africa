@@ -1,5 +1,3 @@
-import React from 'react';
-
 const TopCategories = () => {
   const categories = [
     { name: 'Electronics', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdfUUR4wn_vNFDXbA-e0Kh_IqgnOzTaLRd2g&s' },
@@ -9,17 +7,20 @@ const TopCategories = () => {
   ];
 
   return (
-    <section>
-      <h2 className="text-2xl font-bold mb-4">Top Categories</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <section className="px-4 md:px-8 lg:px-16 py-8">
+      <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">Top Categories</h2>
+      <div className="flex flex-wrap justify-center gap-6">
         {categories.map((category, index) => (
-          <div key={index} className="border p-4 rounded-lg">
+          <div
+            key={index}
+            className="border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 w-40 sm:w-48 md:w-56 lg:w-64"
+          >
             <img
               src={category.image}
               alt={category.name}
-              className="w-full h-40 object-cover rounded mb-2"
+              className="w-full h-40 object-cover rounded-t-lg"
             />
-            <p className="font-semibold text-center">{category.name}</p>
+            <p className="font-semibold text-center text-sm sm:text-base py-2">{category.name}</p>
           </div>
         ))}
       </div>

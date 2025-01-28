@@ -45,7 +45,7 @@
                 alt={category}
                 className="w-[90%] rounded-xl object-cover mb-2"
               />
-              <p className="text-center text-[17px]">{category}</p>
+              <p className="text-center text-sm font-medium md:text-[17px]">{category}</p>
             </Link>
           ))
         ) : (

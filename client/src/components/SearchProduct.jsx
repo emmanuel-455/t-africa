@@ -119,17 +119,17 @@ function SearchProduct() {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg mb-5 font-bold">Showing results for "{searchQuery}"</h2>
+      <h2 className="text-lg mb-5 font-bold">Showing results for {searchQuery}</h2>
       <div className='items-center mb-3'><Filter /></div>
       {products.length ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map((product) => (
-            <div key={product.id} className="flex flex-col rounded-t-lg bg-white overflow-hidden">
+            <div key={product.id} className="flex flex-col rounded-t-lg bg-white h-[250px] overflow-hidden">
               <Link to={`/product/${product.id}`} className="w-full h-[6rem] bg-[#E0E5EB]">
                 <img src={product.thumbnail} alt={product.title} className="p-2 w-[130px] h-full object-cover m-auto" />
               </Link>
               <div className="px-4 py-2">
-                <h3 className="text-sm leading-[18px] font-semibold">{product.title}</h3>
+                <h3 className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">{product.title}</h3>
                 <p className="text-black text-base my-1            font-bold">₦{product.price}</p>
                 <p className="text-sm text-gray-600">Min. order: {product.minimumOrderQuantity} pieces</p>
               </div>
@@ -144,7 +144,7 @@ function SearchProduct() {
         </div>
       ) : (
         <div className="text-center">
-          <p>No products found for "{searchQuery}".</p>
+          <p>No products found for {searchQuery}.</p>
           <p>Try different keywords or browse popular categories.</p>
         </div>
       )}

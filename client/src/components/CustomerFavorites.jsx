@@ -10,19 +10,19 @@ const CustomerFavorites = ({ products }) => (
         <Link
           key={index}
           to={`/product/${product.id}`} // Dynamic link to the product details page
-          className="w-[200px] bg-white flex flex-col flex-shrink-0 px-4 rounded-md"
+          className="w-[150px] md:w-[200px] bg-white flex flex-col flex-shrink-0 px-4 rounded-md"
         >
           <img
             src={product.thumbnail}
             alt={product.title}
             className="w-full h-40 object-cover rounded mb-2"
           />
-          <p className="font-semibold text-sm">{product.title}</p>
+          <p className="text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis">{product.title}</p>
           <div className="flex flex-col justify-between pb-1">
             <p className="text-base text-black font-bold mt-1">₦{product.price}</p>
             <div className='flex justify-between items-center'>
             <p className="text-xs text-gray-500">{product.stock} items left</p>
-            <p className="text-gray-500 text-xs my-2">{product.rating} ★</p>
+            <p className="text-gray-500 mb-2 text-xs my-2">{product.rating} ★</p>
             </div>
           </div>
         </Link>

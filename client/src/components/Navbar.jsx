@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiSearch, FiUser, FiInbox, FiBookmark, FiLogOut, FiChevronDown, FiShoppingBag } from 'react-icons/fi'; // Icons for dropdown and links
 import Logo from "../assets/T-LOGO.svg";
@@ -93,59 +93,72 @@ function Navbar() {
         </div>
 
         {/* Right Side - Profile, Sign Up, etc. */}
-        <div className="flex items-center gap-5 relative">
-          {isUserLoggedIn ? (
-            <>
-              {/* Profile Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={toggleProfileDropdown}
-                  className="hidden lg:flex gap-2 font-bold items-center"
-                >
-                  <img src={Profile} alt="Profile" className="w-[40px]" />
-                  <p>Chidalu</p>
-                  <FiChevronDown size={20} />
-                </button>
-                {isProfileDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-50">
-                    <Link to="/profile" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      <FiUser className="mr-2" /> My Account
-                    </Link>
-                    <Link to="/orders" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      <FiShoppingBag className="mr-2" /> Orders
-                    </Link>
-                    <Link to="/inbox" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      <FiInbox className="mr-2" /> Inbox
-                    </Link>
-                    <Link to="/saved" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      <FiBookmark className="mr-2" /> Saved Items
-                    </Link>
-                    <button
-                      onClick={() => console.log('Logout')}
-                      className="flex items-center w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
-                    >
-                      <FiLogOut className="mr-2" /> Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-              <MessageDropdown />
-              <CartDropdown />
-            </>
-          ) : (
-            <Link to="./signin">
-              <button className="rounded-full bg-brandGreen text-white font-semibold text-nowrap px-4 py-[8px] text-sm lg:text-base">
-                Sign in
-              </button>
-            </Link>
-          )}
+        <div className="flex items-center gap-3 pr-2 relative">
+        {isUserLoggedIn ? (
+  <>
+    {/* Profile Dropdown */}
+    <div className="relative">
+      <button
+        onClick={toggleProfileDropdown}
+        className="hidden lg:flex gap-2 font-bold items-center"
+      >
+        <img src={Profile} alt="Profile" className="w-[40px]" />
+        <p>Chidalu</p>
+        <FiChevronDown size={20} />
+      </button>
+      {isProfileDropdownOpen && (
+        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-50">
+          <Link to="/profile" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+            <FiUser className="mr-2" /> My Account
+          </Link>
+          <Link to="/orders" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+            <FiShoppingBag className="mr-2" /> Orders
+          </Link>
+          <Link to="/inbox" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+            <FiInbox className="mr-2" /> Inbox
+          </Link>
+          <Link to="/saved" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+            <FiBookmark className="mr-2" /> Saved Items
+          </Link>
+          <button
+            onClick={() => console.log('Logout')}
+            className="flex items-center w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+          >
+            <FiLogOut className="mr-2" /> Logout
+          </button>
+        </div>
+      )}
+    </div>
+    <MessageDropdown />
+    <CartDropdown />
+  </>
+) : (
+  <>
+    <Link to="/signin">
+      <button className="rounded-full bg-brandGreen text-white font-semibold text-nowrap px-4 py-[8px] text-xs lg:text-base">
+        Login
+      </button>
+    </Link>
+    <Link to="/signup">
+      <button className="rounded-full bg-brandGreen text-white font-semibold text-nowrap px-4 py-[8px] text-xs lg:text-base">
+        Sign Up
+      </button>
+    </Link>
+  </>
+)}
 
-          <img
-            className="block lg:hidden cursor-pointer"
-            src={Menu}
-            alt="Menu"
-            onClick={toggleMobileMenu}
-          />
+
+
+          {/* Mobile Menu Icon */}
+{isUserLoggedIn && (
+  <img
+    className="block lg:hidden cursor-pointer"
+    src={Menu}
+    alt="Menu"
+    onClick={toggleMobileMenu}
+  />
+)}
+
         </div>
       </div>
 

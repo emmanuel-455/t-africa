@@ -10,7 +10,7 @@ const FlashSales = ({ products }) => (
         <Link
           key={index}
           to={`/product/${product.id}`} // Link to product details page
-          className="w-[200px] bg-white flex flex-col flex-shrink-0 px-4 rounded-md"
+          className="w-[150px] md:w-[200px] bg-white flex flex-col flex-shrink-0 px-4 rounded-md"
         >
           {/* Product image */}
           <img
@@ -19,7 +19,7 @@ const FlashSales = ({ products }) => (
             className="w-full h-40 object-cover rounded mb-2"
           />
           {/* Product title */}
-          <p className="font-semibold text-sm">{product.title}</p>
+          <p className="text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis">{product.title}</p>
           {/* Flash Sale label */}
           <p className="text-green-500 font-bold text-xs">Limited Time Offer</p>
           {/* Product price and stock */}
@@ -27,7 +27,7 @@ const FlashSales = ({ products }) => (
             <p className="text-base text-black font-bold mt-1">
               ₦{product.price}
             </p>
-            <p className="text-xs text-gray-500">{product.stock} items left</p>
+            <p className="text-xs mb-2 text-gray-500">{product.stock} items left</p>
           </div>
         </Link>
       ))}

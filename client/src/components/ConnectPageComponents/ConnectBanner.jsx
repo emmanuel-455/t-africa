@@ -34,9 +34,9 @@ const ConnectBanner = () => {
   };
 
   return (
-    <div className="flex mb-14 flex-col lg:flex-row gap-4 lg:h-[400px]">
+    <div className="flex mb-14 flex-col-reverse lg:flex-row gap-4 lg:h-[400px]">
       {/* Left Section with Carousel */}
-      <div className="w-full lg:w-[70%] md:w-[60%] h-auto rounded-lg lg:rounded-[30px] overflow-hidden">
+      <div className="w-[100%] lg:w-[70%] md:w-[60%] h-[300px] md:h-auto rounded-lg lg:rounded-[30px] overflow-hidden">
         <Slider {...sliderSettings}>
           {bannerImages.map((image, index) => (
             <div key={index} className="w-full h-[400px] lg:h-[700px]">
@@ -47,7 +47,7 @@ const ConnectBanner = () => {
                 }}
               >
                 <div className="bg-black bg-opacity-50 h-full flex items-center justify-center">
-                  <p className="text-white text-2xl lg:text-4xl font-bold px-4 text-center">
+                  <p className="text-white text-3xl text-wrap lg:text-4xl font-bold px-4 text-center">
                     {image.caption}
                   </p>
                 </div>
@@ -61,13 +61,13 @@ const ConnectBanner = () => {
       <div className="flex flex-row md:flex-col w-full lg:w-[30%] gap-4">
         {/* First box */}
         <div className="bg-[#fff] rounded-lg w-full h-[140px] lg:h-[219px]">
-          <ul className="mt-6 mx-6 flex flex-col gap-6">
+          <ul className="pt-2 md:pt-6 px-2 md:px-6 flex flex-col gap-4 md:gap-6">
             {/* CALL TO ORDER */}
-            <li className="flex items-center gap-4">
+            <li className="flex items-center pt-3 gap-4">
               <FaPhoneAlt size={24} className="text-brandGreen" />
-              <div>
-                <p className="font-semibold text-[16px]">CALL TO ORDER</p>
-                <p className="text-[14px] text-gray-600">
+              <div className='text-xs'>
+                <p className="font-bold text-sm md:text-[16px]">CALL TO ORDER</p>
+                <p className="text-xs md:text-[14px] text-gray-600">
                   <a href="tel:07084934850" className="hover:underline">
                     07084934850
                   </a>,{' '}
@@ -78,19 +78,12 @@ const ConnectBanner = () => {
               </div>
             </li>
 
-            {/* Sell on T-Africa */}
-            <li className="flex items-center gap-4">
-              <FaStore size={24} className="text-brandGreen" />
-              <div>
-                <p className="font-semibold text-[16px]">Sell on T-Africa</p>
-              </div>
-            </li>
 
             {/* Best Deals */}
             <li className="flex items-center gap-4">
               <FaTags size={24} className="text-brandGreen" />
               <div>
-                <p className="font-semibold text-[16px]">Best Deals</p>
+                <p className="font-bold md:font-semibold text-sm md:text-[16px]">Best Deals</p>
               </div>
             </li>
           </ul>
@@ -99,9 +92,9 @@ const ConnectBanner = () => {
         {/* Second box */}
         <div className="bg-brandGreen flex flex-col items-center justify-center rounded-lg w-full h-[140px] lg:h-[219px]">
           <div className="bg-white px-2 rounded-lg">
-            <img className="w-[150px]" src={Logo} alt="Logo" />
+            <img className="w-[100px] md:w-[150px]" src={Logo} alt="Logo" />
           </div>
-          <span className="text-white animate-bounceSlow font-bold text-2xl mt-3">JOIN NOW</span>
+          <span className="text-white animate-bounceSlow font-bold text-lg md:text-2xl mt-3">JOIN NOW</span>
         </div>
       </div>
     </div>

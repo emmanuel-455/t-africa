@@ -4,6 +4,8 @@ import { useAtom } from 'jotai';
 import { cartAtom, isUserLoggedInAtom } from '../../redux/Store';
 import Cart from "../../assets/cart.svg";
 import Cart2 from "../../assets/cart2.svg";
+import ReviewsSection from '../../components/ReviewsSection';
+import Category from '../../components/Category';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -11,12 +13,19 @@ function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
   const [cartItems, setCartItems] = useAtom(cartAtom);
-  const [reviews, setReviews] = useState([]);
+  //const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [isUserLoggedIn] = useAtom(isUserLoggedInAtom);
+  //const [newReview, setNewReview] = useState("");
+  //const [reviewRating, setReviewRating] = useState(0);
   const navigate = useNavigate();
+
+  const reviews = [
+    { user: "John Doe", rating: 5, comment: "Excellent product!" },
+    { user: "Jane Smith", rating: 4, comment: "Very good, but could be better." },
+  ];
 
   useEffect(() => {
     const loadProductDetails = async () => {
@@ -95,7 +104,11 @@ function ProductDetails() {
   }
 
   return (
-    <div className="w-full mx-auto p-4 md:p-8 flex flex-col lg:flex-row gap-8 max-w-screen-xl">
+    <div>
+       <div className='mb-4'>
+       <Category />
+       </div>
+      <div className="w-full mx-auto bg-white rounded-2xl p-4 md:p-8 flex flex-col lg:flex-row gap-8 max-w-screen-xl">
       {/* Product Images */}
       <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start gap-4">
         <div className="flex flex-row lg:flex-row gap-1">
@@ -113,7 +126,7 @@ function ProductDetails() {
             ))}
           </div>
 
-          <div className="w-full lg:w-[80%] aspect-square bg-[#E0E5EB] rounded-lg overflow-hidden">
+          <div className="w-full lg:w-[100%] aspect-square bg-[#E0E5EB] rounded-lg overflow-hidden">
             <img 
               src={selectedImage} 
               alt={product.title} 
@@ -125,24 +138,25 @@ function ProductDetails() {
 
       {/* Product Details */}
       <div className="w-full lg:w-2/3 flex flex-col gap-2">
-        <h1 className="text-2xl font-bold">{product.title}</h1>
-        <p className="text-gray-700 lg:w-[500px] text-sm mb-3">{product.description}</p>
-       
-        <div className="rounded-lg">
-          <div className="text-lg font-bold text-[#1F2937] flex items-center space-x-2">
-            <span>US$ {product.price}</span>
-            <span>-</span>
-            <span>US$ {product.price + 4.0}</span>
+      <div className="rounded-lg">
+          <div className="text-2xl mb-3 font-bold text-[#1F2937] flex items-center space-x-2">
+            <span>NGN {product.price}</span>
           </div>
           <p className="text-sm text-[#9CA3AF]">Minimum Order: 1 piece</p>
         </div>
+        <p className="text-gray-700 lg:w-[500px] text-sm mb-3">{product.description}</p>
+       
+        
 
         <div className="flex items-center text-yellow-500">
+          <div>
           {[...Array(5)].map((_, index) => (
             <span key={index} className={`text-xl ${index < Math.floor(product.rating) ? 'text-yellow-500' : 'text-gray-300'}`}>
-              ★
+              ★ 
             </span>
-          ))}
+          ))}{" "}
+          500+ Sold
+          </div>
         </div>
 
         <div>
@@ -163,7 +177,7 @@ function ProductDetails() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col mb-4 md:flex-row gap-4">
           <button
             onClick={handleButtonClick}
             className="w-full md:w-auto bg-brandGreen hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
@@ -177,59 +191,27 @@ function ProductDetails() {
           </button>
         </div>
 
-        {/* Review Section */}
-        <div className="border-t pt-4 mt-4">
-          <h2 className="text-lg font-semibold mb-2">Customer Reviews</h2>
-          {reviews.length > 0 ? (
-            reviews.map((review, index) => (
-              <div key={index} className="mb-4">
-                <p className="font-bold">{review.user}</p>
-                <div className="flex items-center text-yellow-500">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className={`text-lg ${i < review.rating ? 'text-yellow-500' : 'text-gray-300'}`}>
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <p>{review.comment}</p>
-              </div>
-            ))
-          ) : (
-            <p>No reviews yet.</p>
-          )}
-
-          {isUserLoggedIn ? (
-            <div className="mt-4">
-              <h3 className="font-semibold">Add a Review</h3>
-              <textarea
-                value={newReview}
-                onChange={(e) => setNewReview(e.target.value)}
-                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
-                placeholder="Write your review..."
-              />
-              <div className="flex items-center mt-2">
-                <span className="mr-2">Rating:</span>
-                {[...Array(5)].map((_, index) => (
-                  <span
-                    key={index}
-                    className={`cursor-pointer ${index < reviewRating ? 'text-yellow-500' : 'text-gray-300'}`}
-                    onClick={() => setReviewRating(index + 1)}
-                  >
-                    ★
-                  </span>
-                ))}
-              </div>
-              <button onClick={handleSubmitReview} className="bg-brandGreen hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg mt-2">
-                Submit Review
-              </button>
-            </div>
-          ) : (
-            <Link to="/signin" className="text-brandGreen hover:underline">
-              Sign in to leave a review
-            </Link>
-          )}
+        <div className=' border-b pb-4'>
+          <h1 className='mb-3'>Delivery</h1>
+          <p className='font-bold'>Shipping: NGN1099.39</p>
+          <p>Estimated Delivery: 5-10 days</p>
         </div>
+
+        <div>
+          <p><span className='font-bold'>Service</span> Buyer Protection</p>
+        </div>
+
+        <ReviewsSection
+      reviews={reviews}
+      isUserLoggedIn={true}
+      newReview={newReview}
+      setNewReview={setNewReview}
+      reviewRating={reviewRating}
+      setReviewRating={setReviewRating}
+      handleSubmitReview={handleSubmitReview}
+    />
       </div>
+    </div>
     </div>
   );
 }

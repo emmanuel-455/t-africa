@@ -1,7 +1,7 @@
 // src/App.jsx
 
 import { Provider } from 'jotai'; // Jotai Provider for state management
-import { HashRouter as Router, Route, Routes, Outlet } from 'react-router-dom'; // Use HashRouter
+import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom'; // Use BrowserRouter
 
 // Importing components from their respective folders
 import Signup from './pages/Signup/Signup';
@@ -12,7 +12,6 @@ import Footer from './components/Footer';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import SellerDetails from './pages/SellerDetails/SellerDetails'; // Ensure this path is correct
 import LandingHomePage from './pages/LandingPage/LandingHomePage';
-import Home from './pages/Home/Home';
 import SearchResults from './components/SearchResults';
 import ViewCart from './pages/ViewCart/ViewCart';
 import About from './pages/About/About';
@@ -26,13 +25,13 @@ function Layout() {
   return (
     <div className="w-full flex flex-col min-h-screen">
       <div>
-      <Navbar />
+        <Navbar />
       </div>
-      <div className='lg:px-[160px]'>
-      <div className="flex-grow">
-        <Outlet />
-      </div>
-      <Footer />
+      <div className="lg:px-[160px]">
+        <div className="flex-grow">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
     </div>
   );
@@ -46,10 +45,9 @@ function App() {
         <Routes>
           {/* Layout routes for pages with a consistent layout */}
           <Route element={<Layout />}>
-            <Route path="/Home" element={<Home />} />
+          <Route path="/home" element={<LandingHomePage />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/verified-sellers/:sellerName" element={<SellerDetails />} />
-            <Route path="/" element={<LandingHomePage />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/purchaseList" element={<ViewCart />} />
             <Route path="/about" element={<About />} />
@@ -57,7 +55,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/order-confirmation" element={<OrderConfirmation />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
 
           {/* Routes outside the main layout (e.g., login/signup pages) */}
           <Route path="/signin" element={<Login />} />
