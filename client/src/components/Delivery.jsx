@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { MapPin, Truck, RotateCcw } from 'lucide-react';
 
 const Delivery = () => {
+   const [deliveryFee] = useState(`₦ ${1500}`);
   const statesInNigeria = [
     "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", 
     "Benue", "Borno", "Cross River", "Delta", "Ebonyi", "Edo", 
@@ -18,7 +20,6 @@ const Delivery = () => {
     "Rivers": ["Port Harcourt", "Rumuokoro", "Trans-Amadi"],
     "Oyo": ["Ibadan North", "Ibadan South", "Moniya"],
     "Enugu": ["Enugu Central", "Nsukka", "Emene", "Abakpa"],
-    // Add more states and locations as needed
   };
 
   const [selectedState, setSelectedState] = useState("");
@@ -33,13 +34,12 @@ const Delivery = () => {
   }, [selectedState]);
 
   return (
-    <div className='w-[30%]'>
-      <h2 className='text-nowrap'>Delivery and Return</h2>
+    <div className='w-[35%] bg-white ml-3 py-4 px-2'>
+      <h2 className='text-nowrap mb-3 text-lg font-semibold'>DELIVERY & RETURNS</h2>
       <div>Choose your location</div>
 
-      {/* State Selector */}
       <select
-        className="mt-2 p-2 border border-gray-300 rounded-md w-full max-w-xs"
+        className="mt-2 p-2 border mb-2 border-gray-300 rounded-md w-full max-w-xs"
         value={selectedState}
         onChange={(e) => setSelectedState(e.target.value)}
       >
@@ -51,7 +51,6 @@ const Delivery = () => {
         ))}
       </select>
 
-      {/* Pickup Location Selector */}
       {selectedState && (
         <select
           className="mt-2 p-2 border border-gray-300 rounded-md w-full max-w-xs"
@@ -66,29 +65,38 @@ const Delivery = () => {
         </select>
       )}
 
-      {/* Delivery Instructions */}
-      <div>
-         <div>
-            <h3>Pickup Station</h3>
-            <p>
-            Delivery Fees ₦ 600
-            Ready for pickup between 31 January and 01 February if you place your order within the next 13hrs 54mins
+      <div className='gap-2 flex pt-4 flex-col'>
+        <div className="flex gap-2 items-start">
+          <MapPin className="w-[100px] text-gray-600" />
+          <div>
+            <h3 className="font-medium mb-1">Pickup Station</h3>
+            <p className="text-[13px]">
+              Delivery Fees {deliveryFee}
+              <br />
+              Ready for pickup between 31 January and 01 February if you place your order within the next 13hrs 54mins
             </p>
-         </div>
-         <div>
-            <h3>Door Delivery</h3>
-            <p>
-            Delivery Fees ₦ 600
-            Ready for pickup between 31 January and 01 February if you place your order within the next 13hrs 54mins
+          </div>
+        </div>
+        <div className="flex gap-2 items-start">
+          <Truck className="w-[100px] text-gray-600" />
+          <div>
+            <h3 className="font-medium mb-1">Door Delivery</h3>
+            <p className="text-[13px]">
+              Delivery Fees {deliveryFee}
+              <br />
+              Ready for delivery between 31 January and 01 February if you place your order within the next 13hrs 54mins
             </p>
-         </div>
-         <div>
-            <h3>Return Policy</h3>
-            <p>
-            Delivery Fees ₦ 600
-            Ready for pickup between 31 January and 01 February if you place your order within the next 13hrs 54mins
+          </div>
+        </div>
+        <div className="flex gap-2 items-start">
+          <RotateCcw className="w-[40px] text-gray-600" />
+          <div>
+            <h3 className="font-medium mb-1">Return Policy</h3>
+            <p className="text-[13px]">
+              Free return within 7 days for ALL eligible items
             </p>
-         </div>
+          </div>
+        </div>
       </div>
     </div>
   );
