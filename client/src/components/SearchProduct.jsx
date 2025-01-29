@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../utils/api';
 import { useAtom } from 'jotai';
@@ -11,7 +11,7 @@ function SearchProduct() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [ratingFilter, setRatingFilter] = useAtom(ratingFilterAtom);
-  const [cartItems, setCartItems] = useAtom(cartAtom);
+  const [setCartItems] = useAtom(cartAtom);
   const [minPrice, setMinPrice] = useAtom(minPriceAtom);
   const [maxPrice, setMaxPrice] = useAtom(maxPriceAtom);
   const user = true;

@@ -49,7 +49,7 @@ const categories = [
 ];
 
 function ConnectFeatured() {
-  const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
+  const [ setSelectedCategory] = useAtom(selectedCategoryAtom);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);

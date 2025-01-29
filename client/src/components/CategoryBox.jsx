@@ -1,5 +1,5 @@
-  import React, { useState, useEffect } from 'react';
-  import { Link, useNavigate } from 'react-router-dom';
+  import { useState, useEffect } from 'react';
+  import { Link } from 'react-router-dom';
 
   // Assuming fetchProducts is an API call function to get the products
   import { fetchProducts } from '../utils/api'; 
@@ -7,7 +7,6 @@
   const CategoryBox = () => {
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState(null); // Error state
-    const navigate = useNavigate();
 
     // Fetch categories when the component mounts
     useEffect(() => {
@@ -17,7 +16,7 @@
           const fetchedCategories = products.map(product => product.category); // Assuming category is part of product
           setCategories([...new Set(fetchedCategories)]); // Set unique categories
         } catch (err) {
-          setError('Failed to fetch categories');
+          setError('Failed to fetch categories', err);
         }
       };
 

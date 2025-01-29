@@ -1,5 +1,4 @@
 import { FaPhoneAlt } from 'react-icons/fa';
-import { FaStore } from 'react-icons/fa';
 import { FaTags } from 'react-icons/fa';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';

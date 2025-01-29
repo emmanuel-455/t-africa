@@ -26,7 +26,7 @@ const RandomCateProduct = () => {
         setProducts(filteredProducts);
         setLoading(false);
       } catch (err) {
-        setError('Failed to load products.');
+        setError('Failed to load products.', err);
         setLoading(false);
       }
     };

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { cartAtom, isUserLoggedInAtom } from '../../redux/Store';
 import Cart from "../../assets/cart.svg";
 import Cart2 from "../../assets/cart2.svg";
 import ReviewsSection from '../../components/ReviewsSection';
 import Category from '../../components/Category';
+import Delivery from '../../components/Delivery';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -13,13 +14,10 @@ function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
   const [cartItems, setCartItems] = useAtom(cartAtom);
-  //const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [isUserLoggedIn] = useAtom(isUserLoggedInAtom);
-  //const [newReview, setNewReview] = useState("");
-  //const [reviewRating, setReviewRating] = useState(0);
   const navigate = useNavigate();
 
   const reviews = [
@@ -36,7 +34,6 @@ function ProductDetails() {
         if (response.ok) {
           setProduct(data);
           setSelectedImage(data.thumbnail);
-          setReviews(data.reviews || []);
 
           const relatedResponse = await fetch(`https://dummyjson.com/products/category/${data.category}`);
           const relatedData = await relatedResponse.json();
@@ -54,14 +51,14 @@ function ProductDetails() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+  }, []);
 
   const handleAddToCart = () => {
     const newItem = {
       id: product.id,
       name: product.title,
       price: product.price,
-      quantity,
+      quantity: Math.max(1, quantity),
       image: selectedImage,
     };
 
@@ -94,7 +91,7 @@ function ProductDetails() {
       user: "John Doe",
     };
 
-    setReviews((prevReviews) => [...prevReviews, newReviewObject]);
+    reviews.push(newReviewObject);
     setNewReview('');
     setReviewRating(0);
   };
@@ -108,6 +105,7 @@ function ProductDetails() {
        <div className='mb-4'>
        <Category />
        </div>
+      <div className='flex'>
       <div className="w-full mx-auto bg-white rounded-2xl p-4 md:p-8 flex flex-col lg:flex-row gap-8 max-w-screen-xl">
       {/* Product Images */}
       <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start gap-4">
@@ -138,10 +136,12 @@ function ProductDetails() {
 
       {/* Product Details */}
       <div className="w-full lg:w-2/3 flex flex-col gap-2">
+      <h2 className="text-xl font-normal text-gray-900">{product.title}</h2>
       <div className="rounded-lg">
-          <div className="text-2xl mb-3 font-bold text-[#1F2937] flex items-center space-x-2">
+          <div className="text-xl mb-2 bg-gray-200 px-1 py-1 font-bold text-[#1F2937] flex items-center space-x-2">
             <span>NGN {product.price}</span>
           </div>
+          
           <p className="text-sm text-[#9CA3AF]">Minimum Order: 1 piece</p>
         </div>
         <p className="text-gray-700 lg:w-[500px] text-sm mb-3">{product.description}</p>
@@ -168,7 +168,7 @@ function ProductDetails() {
             <input
               type="number"
               value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
+              onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
               className="w-16 text-center border-none outline-none"
             />
             <button onClick={() => setQuantity(quantity + 1)} className="font-bold text-xl">
@@ -212,6 +212,8 @@ function ProductDetails() {
     />
       </div>
     </div>
+        <Delivery />
+      </div>
     </div>
   );
 }

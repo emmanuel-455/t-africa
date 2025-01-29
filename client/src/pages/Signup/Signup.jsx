@@ -13,7 +13,7 @@ function Signup() {
     const [password, setPassword] = useState('');
     const [fullName, setfullName] = useState('');
     //const [isError, setIsError] = useState(false);
-    const [isUserLoggedIn, setUserLoggedIn] = useAtom(isUserLoggedInAtom);
+    const [setUserLoggedIn] = useAtom(isUserLoggedInAtom);
 
     const navigate = useNavigate();
 

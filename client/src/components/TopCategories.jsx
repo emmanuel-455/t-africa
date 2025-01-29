@@ -9,7 +9,7 @@ const TopCategories = () => {
   return (
     <section className="px-4 md:px-8 lg:px-16 py-8">
       <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">Top Categories</h2>
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="flex flex-wrap md:flex-nowrap justify-center gap-6">
         {categories.map((category, index) => (
           <div
             key={index}

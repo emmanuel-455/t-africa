@@ -22,7 +22,7 @@ function LandingHomePage() {
   const [products, setProducts] = useAtom(productsAtom);
   const [loading, setLoading] = useAtom(loadingAtom);
   const [error, setError] = useAtom(errorAtom);
-  const [page, setPage] = React.useState(1); // State to manage pagination
+  const [page] = React.useState(1); // State to manage pagination
 
   useEffect(() => {
     const fetchProducts = async () => {
