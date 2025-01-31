@@ -27,7 +27,7 @@ function Layout() {
       <div>
         <Navbar />
       </div>
-      <div className="lg:px-[160px]">
+      <div className="lg:px-[120px]">
         <div className="flex-grow">
           <Outlet />
         </div>

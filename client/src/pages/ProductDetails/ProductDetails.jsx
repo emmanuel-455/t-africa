@@ -7,6 +7,7 @@ import Cart2 from "../../assets/cart2.svg";
 import ReviewsSection from '../../components/ReviewsSection';
 import Category from '../../components/Category';
 import Delivery from '../../components/Delivery';
+import SellerInfo from '../../components/SellerInfo';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -106,7 +107,7 @@ function ProductDetails() {
        <Category />
        </div>
       <div className='flex'>
-      <div className="w-full mx-auto bg-white rounded-2xl p-4 md:p-8 flex flex-col lg:flex-row gap-8 max-w-screen-xl">
+      <div className="w-full mx-auto bg-white rounded-xl p-4 md:p-8 flex flex-col lg:flex-row gap-10 max-w-screen-xl">
       {/* Product Images */}
       <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start gap-4">
         <div className="flex flex-row lg:flex-row gap-1">
@@ -124,7 +125,7 @@ function ProductDetails() {
             ))}
           </div>
 
-          <div className="w-full lg:w-[100%] aspect-square bg-[#E0E5EB] rounded-lg overflow-hidden">
+          <div className="w-full lg:w-[220px] aspect-square bg-[#E0E5EB] rounded-lg overflow-hidden">
             <img 
               src={selectedImage} 
               alt={product.title} 
@@ -177,7 +178,7 @@ function ProductDetails() {
           </div>
         </div>
 
-        <div className="flex flex-col mb-4 md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <button
             onClick={handleButtonClick}
             className="w-full md:w-auto bg-brandGreen hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
@@ -191,16 +192,6 @@ function ProductDetails() {
           </button>
         </div>
 
-        <div className=' border-b pb-4'>
-          <h1 className='mb-3'>Delivery</h1>
-          <p className='font-bold'>Shipping: NGN1099.39</p>
-          <p>Estimated Delivery: 5-10 days</p>
-        </div>
-
-        <div>
-          <p><span className='font-bold'>Service</span> Buyer Protection</p>
-        </div>
-
         <ReviewsSection
       reviews={reviews}
       isUserLoggedIn={true}
@@ -212,7 +203,10 @@ function ProductDetails() {
     />
       </div>
     </div>
+        <div className='flex flex-col'>
         <Delivery />
+        <SellerInfo />
+        </div>
       </div>
     </div>
   );

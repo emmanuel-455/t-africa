@@ -6,7 +6,7 @@ function ReviewsSection({ reviews, isUserLoggedIn, newReview, setNewReview, revi
   const [showReviews, setShowReviews] = useState(false);
 
   return (
-    <div className="border-t pt-4 mt-4">
+    <div className="border-t pt-4">
       <h2 className="text-lg font-semibold mb-2">Customer Reviews</h2>
 
       {/* Dropdown Toggle Button */}
