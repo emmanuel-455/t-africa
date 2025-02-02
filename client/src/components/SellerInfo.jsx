@@ -6,9 +6,7 @@ const SellerInfo = () => {
       <h1 className="font-medium mb-3">SELLER INFORMATION</h1>
       <div className="flex justify-between items-end">
         <div>
-          <Link className="font-medium">
-            ElectroWorld Store - AC
-          </Link>
+        <Link to="/verified-sellers" className="font-semibold text-blue-600">ElectroWorld Store - AC</Link>
           <p className="text-sm"><span className="font-medium">118</span> Followers</p>
         </div>
         <button className="text-sm text-white px-3 py-2 rounded-lg bg-brandGreen">Follow</button>

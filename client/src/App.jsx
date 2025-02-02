@@ -45,19 +45,19 @@ function App() {
         <Routes>
           {/* Layout routes for pages with a consistent layout */}
           <Route element={<Layout />}>
-          <Route path="/" element={<LandingHomePage />} />
+            <Route path="/" element={<LandingHomePage />} />
             <Route path="/product/:id" element={<ProductDetails />} />
-            <Route path="/verified-sellers/:sellerName" element={<SellerDetails />} />
+            <Route path="/verified-sellers" element={<SellerDetails />} /> {/* ✅ Moved inside Layout */}
             <Route path="/search" element={<SearchResults />} />
             <Route path="/purchaseList" element={<ViewCart />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
+
+          {/* Routes outside the main layout (e.g., checkout, authentication pages) */}
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
-
-          {/* Routes outside the main layout (e.g., login/signup pages) */}
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/confirm-email" element={<EmailConfirmation />} />
