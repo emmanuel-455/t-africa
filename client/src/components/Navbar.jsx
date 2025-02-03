@@ -94,7 +94,7 @@ function Navbar() {
 
         {/* Right Side - Profile, Sign Up, etc. */}
         <div className="flex items-center gap-3 pr-2 relative">
-        {isUserLoggedIn ? (
+        {isUserLoggedInAtom ? (
   <>
     {/* Profile Dropdown */}
     <div className="relative">

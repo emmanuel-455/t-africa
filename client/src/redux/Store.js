@@ -9,6 +9,7 @@ export const isUserLoggedInAtom = atomWithStorage('isUserLoggedIn', false);
 export const userDetailsAtom = atom({
     name: 'userDetails',
     default: {
+
       firstName: '',
       lastName: '',
       email: '',

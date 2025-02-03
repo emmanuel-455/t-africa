@@ -27,22 +27,25 @@ function LandingHomePage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        console.log("Fetching products..."); // Debugging log
         setLoading(true);
-        const response = await fetch(`https://dummyjson.com/products?skip=${(page - 1) * 30}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch products');
-        }
+        
+        const response = await fetch(`https://dummyjson.com/products?skip=${(page - 1) * 30}&limit=30`);
+        if (!response.ok) throw new Error('Failed to fetch products');
+        
         const data = await response.json();
-        setProducts(data.products); // Update atom state with fetched products
+        console.log("Fetched products:", data.products); // Debugging log
+        setProducts(data.products);
       } catch (err) {
-        setError(err.message); // Update atom state with error
+        console.error("Fetch error:", err);
+        setError(err.message);
       } finally {
-        setLoading(false); // Update atom state to indicate loading is complete
+        setLoading(false);
       }
     };
 
     fetchProducts();
-  }, [page, setLoading, setError, setProducts]); // Dependencies: page and setters
+  }, [page, setLoading, setError, setProducts]);
 
   if (loading) return <p className="text-center text-lg font-medium text-gray-600">Loading...</p>;
   if (error) return <p className="text-center text-lg font-medium text-red-600">Error: {error}</p>;
@@ -72,7 +75,6 @@ function LandingHomePage() {
       {/* Top Categories and Editors' Picks */}
       <div className="grid gap-8 md:grid-cols-1">
         <TopCategories />
-        
       </div>
 
       {/* Additional Sections */}
