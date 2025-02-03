@@ -24,7 +24,7 @@ function Signup() {
     }else{
        
         setUserLoggedIn(false);
-        navigate('/home');
+        navigate('/');
 
   }
     }

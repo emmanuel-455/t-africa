@@ -46,7 +46,7 @@ function App() {
         <Routes>
           {/* Layout routes for pages with a consistent layout */}
           <Route element={<Layout />}>
-          <Route path="/home" element={<LandingHomePage />} />
+          <Route path="/" element={<LandingHomePage />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/verified-sellers" element={<SellerDetails />} />
             <Route path="/search" element={<SearchResults />} />

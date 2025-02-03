@@ -20,7 +20,7 @@ function Login() {
       return alert("Please fill all fields")
     }else {
       // TODO: Redirect to home page after successful login
-      window.location.href = '/home';
+      window.location.href = '/';
       setUserLoggedIn(true); // Set user logged in state
     }
   }
