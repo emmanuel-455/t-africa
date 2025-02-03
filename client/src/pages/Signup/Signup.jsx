@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Logo from '../../components/Logo';
 import GoogleImage from '../../assets/Google-img.svg';
 import AppleImage from '../../assets/appleimg.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import FormFooter from '../../components/FormFooter';
 import { isUserLoggedInAtom } from '../../redux/Store';
 import { useAtom } from 'jotai';
@@ -15,16 +15,16 @@ function Signup() {
     //const [isError, setIsError] = useState(false);
     const [setUserLoggedIn] = useAtom(isUserLoggedInAtom);
 
-    const navigate = useNavigate();
+
 
     function handleSubmit(e) {
       e.preventDefault();
     if(!email ||!password ||!fullName){
       return alert("Please fill all fields")
     }else{
-       
+      window.location.href = '/';
         setUserLoggedIn(false);
-        navigate('/');
+        
 
   }
     }

@@ -1,27 +1,27 @@
-import Logo from '../../components/Logo';
-import GoogleImage from '../../assets/Google-img.svg';
-import AppleImage from '../../assets/appleimg.svg';
-import { Link } from 'react-router-dom';
-import FormFooter from '../../components/FormFooter';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
 import { isUserLoggedInAtom } from '../../redux/Store';
-
+import { Link, useNavigate } from 'react-router-dom';
+import Logo from '../../components/Logo';
+import GoogleImage from '../../assets/Google-img.svg';
+import AppleImage from '../../assets/appleimg.svg';
+import FormFooter from '../../components/FormFooter';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [setUserLoggedIn] = useAtom(isUserLoggedInAtom);
+  const [isUserLoggedIn, setUserLoggedIn] = useAtom(isUserLoggedInAtom);
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    // TODO: Implement login logic here
-    if(!email ||!password){
-      return alert("Please fill all fields")
-    }else {
-      // TODO: Redirect to home page after successful login
-      window.location.href = '/';
-      setUserLoggedIn(true); // Set user logged in state
+    
+    if (!email || !password) {
+      return alert('Please fill all fields');
+    } else {
+      // Simulate authentication
+      setUserLoggedIn(true); // Set user logged-in state
+      navigate('/'); // Redirect to home page after successful login
     }
   }
 
@@ -32,7 +32,7 @@ function Login() {
       </div>
       <div className='bg-[#ffffff] w-[420px] px-[50px] flex flex-col m-auto rounded-[19px]'>
         <h2 className='font-bold text-[44px] text-start mt-[45px] mb-[40px]'>Sign in</h2>
-        <form className='flex flex-col'>
+        <form className='flex flex-col' onSubmit={handleSubmit}>
           <div className="mb-[24px]">
             <label className='block mb-2 text-[16px] font-medium'>
               Email address
@@ -61,7 +61,7 @@ function Login() {
             />
           </div>
 
-          <button onClick={handleSubmit} className='w-full py-2 font-medium text-white mb-[40px] bg-[#06C569] rounded-[13px]'>
+          <button type="submit" className='w-full py-2 font-medium text-white mb-[40px] bg-[#06C569] rounded-[13px]'>
             Sign in
           </button>
         </form>
@@ -88,7 +88,7 @@ function Login() {
 
       <FormFooter />
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

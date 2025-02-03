@@ -1,10 +1,10 @@
 // src/store/store.js
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
+//import { atomWithStorage } from 'jotai/utils';
 
 //export const isUserLoggedInAtom = atom(false);
 
-export const isUserLoggedInAtom = atomWithStorage('isUserLoggedIn', false);
+export const isUserLoggedInAtom = atom(false);
 
 export const userDetailsAtom = atom({
     name: 'userDetails',
