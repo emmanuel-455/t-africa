@@ -5,7 +5,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 const AddressBook = ({ savedAddresses, onEdit, onDelete }) => {
    console.log(savedAddresses)
   return (
-    <div className="h-[200px] w-[100%] border border-gray-300">
+    <div className="h-auto w-[100%] border border-gray-300">
       <h2 className="border-b border-gray-300 py-3 px-3">ADDRESS BOOK</h2>
       {savedAddresses.length > 0 ? (
         <ul className="space-y-2 flex flex-col">

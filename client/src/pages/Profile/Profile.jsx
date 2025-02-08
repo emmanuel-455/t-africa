@@ -11,7 +11,7 @@ import SavedItems from "../../components/SavedItems";
 import FollowedSellers from "../../components/FollowedSellers";
 import { isUserLoggedInAtom } from "../../redux/Store";
 import { useSetAtom } from "jotai";
-import Address from "../../components/Address";
+import { FiMenu } from "react-icons/fi";
 
 const Profile = () => {
   const location = useLocation();
@@ -21,9 +21,9 @@ const Profile = () => {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
   const [activeTab, setActiveTab] = useState("account");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
-    // Extract tab from query params and set activeTab
     const params = new URLSearchParams(location.search);
     const tab = params.get("tab");
     if (tab) setActiveTab(tab);
@@ -39,52 +39,36 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex w-full text-xs font-medium md:font-normal md:text-base gap-2 md:gap-4 flex-row">
+    <div className="flex flex-col md:flex-row w-full gap-4">
+      {/* Mobile Menu Button */}
+      <button 
+        className="md:hidden p-2 rounded-md"
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      >
+        <FiMenu size={24} />
+      </button>
+      
       {/* Sidebar */}
-      <div className="flex rounded-md flex-col md:w-[30%] bg-white">
+      <div 
+        className={`fixed md:relative top-0 left-0 h-full w-64 bg-white p-4 z-50 transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:w-1/4`}
+      >
         <ul>
-          <li
-            className={`py-3 md:px-5 px-2 cursor-pointer ${activeTab === "account" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => setActiveTab("account")}
-          >
-            My Account
-          </li>
-          <li
-            className={`py-3 md:px-5 px-2 cursor-pointer ${activeTab === "orders" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => setActiveTab("orders")}
-          >
-            Orders
-          </li>
-          <li
-            className={`py-3 md:px-5 px-2 cursor-pointer ${activeTab === "inbox" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => setActiveTab("inbox")}
-          >
-            Inbox
-          </li>
-          <li
-            className={`py-3 md:px-5 px-2 cursor-pointer ${activeTab === "pendingReview" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => setActiveTab("pendingReview")}
-          >
-            Pending Review
-          </li>
-          <li
-            className={`py-3 md:px-5 px-2 cursor-pointer ${activeTab === "voucher" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => setActiveTab("voucher")}
-          >
-            Voucher
-          </li>
-          <li
-            className={`py-3 md:px-5 px-2 cursor-pointer ${activeTab === "savedItems" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => setActiveTab("savedItems")}
-          >
-            Saved Items
-          </li>
-          <li
-            className={`py-3 md:px-5 px-2 cursor-pointer ${activeTab === "followedSellers" ? "bg-gray-300" : "hover:bg-gray-200"}`}
-            onClick={() => setActiveTab("followedSellers")}
-          >
-            Followed Sellers
-          </li>
+          {[
+            "account", "orders", "inbox", "pendingReview", "voucher", "savedItems", "followedSellers"
+          ].map((tab) => (
+            <li
+              key={tab}
+              className={`py-3 px-5 cursor-pointer ${
+                activeTab === tab ? "bg-gray-300" : "hover:bg-gray-200"
+              }`}
+              onClick={() => {
+                setActiveTab(tab);
+                setIsSidebarOpen(false);
+              }}
+            >
+              {tab.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+            </li>
+          ))}
         </ul>
         <p onClick={handleLogout} className="py-3 px-5 cursor-pointer text-red-500">
           Logout
@@ -92,31 +76,27 @@ const Profile = () => {
       </div>
 
       {/* Dynamic Content */}
-      <div className="flex-1 bg-white px-2 md:px-6 py-3">
+      <div className="flex-1 bg-white p-6">
         <h1 className="text-xl mb-5">Account Overview</h1>
 
         {activeTab === "account" && (
-          <div className="gap-3 grid md:grid-cols-2">
-            <div className="w-full">
-              <Accountdetails />
-            </div>
-            <div className="w-full">
-            <Address />
-            </div>
-            <div>
-              <StoreCredit />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <Accountdetails />
+            <AddressBook
+              savedAddresses={savedAddresses}
+              onSelectAddress={handleSelectAddress}
+              selectedAddressIndex={selectedAddressIndex}
+            />
+            <StoreCredit />
           </div>
         )}
 
-        <div>
         {activeTab === "orders" && <Orders />}
         {activeTab === "inbox" && <Inbox />}
         {activeTab === "pendingReview" && <PendingReview />}
         {activeTab === "voucher" && <Voucher />}
         {activeTab === "savedItems" && <SavedItems />}
         {activeTab === "followedSellers" && <FollowedSellers />}
-        </div>
       </div>
     </div>
   );
