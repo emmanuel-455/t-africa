@@ -103,7 +103,7 @@ const PendingReview = () => {
   };
 
   return (
-    <div className="mt-10 p-8 border rounded-xl bg-gray-100 shadow-xl">
+    <div className="mt-10 md:p-8 border rounded-xl bg-gray-100 shadow-xl">
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Pending Reviews</h3>
       {pendingReviews.length === 0 ? (
         <p className="text-lg text-gray-600">No items pending review.</p>

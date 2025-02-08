@@ -87,7 +87,7 @@ function ProductDetails() {
   return (
     <div>
       <Category />
-      <div className='flex'>
+      <div className='flex mt-2'>
       <div className='flex flex-col md:gap-8 lg:gap- md:flex-row lg:flex-row max-w-screen-xl mx-auto p-4 md:p-8 bg-white rounded-xl'>
         {/* Product Images */}
         <div className='flex mb-5 flex-col gap-5'>

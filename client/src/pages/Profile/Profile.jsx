@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Accountdetails from "../../components/Accountdetails";
-import AddressBook from "../../components/AddressBook";
+import Address from "../../components/Address";
 import StoreCredit from "../../components/StoreCredit";
 import Orders from "../../components/Orders";
 import Inbox from "../../components/Inbox";
@@ -11,7 +11,7 @@ import SavedItems from "../../components/SavedItems";
 import FollowedSellers from "../../components/FollowedSellers";
 import { isUserLoggedInAtom } from "../../redux/Store";
 import { useSetAtom } from "jotai";
-import { FiMenu } from "react-icons/fi";
+import { Menu, X } from "lucide-react";
 
 const Profile = () => {
   const location = useLocation();
@@ -21,7 +21,7 @@ const Profile = () => {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
   const [activeTab, setActiveTab] = useState("account");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -41,21 +41,19 @@ const Profile = () => {
   return (
     <div className="flex flex-col md:flex-row w-full gap-4">
       {/* Mobile Menu Button */}
-      <button 
-        className="md:hidden p-2 rounded-md"
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      >
-        <FiMenu size={24} />
-      </button>
-      
+      <div className="md:hidden flex justify-between items-center p-4 bg-white">
+        <h1 className="text-lg font-semibold">Profile</h1>
+        <button onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <div 
-        className={`fixed md:relative top-0 left-0 h-full w-64 bg-white p-4 z-50 transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:w-1/4`}
+      <div
+        className={`fixed inset-y-0 left-0 z-50 bg-white w-64 p-4 transform ${menuOpen ? "translate-x-0" : "-translate-x-full"} transition-transform md:relative md:translate-x-0 md:w-1/4`}
       >
         <ul>
-          {[
-            "account", "orders", "inbox", "pendingReview", "voucher", "savedItems", "followedSellers"
-          ].map((tab) => (
+          {["account", "orders", "inbox", "pendingReview", "voucher", "savedItems", "followedSellers"].map((tab) => (
             <li
               key={tab}
               className={`py-3 px-5 cursor-pointer ${
@@ -63,29 +61,26 @@ const Profile = () => {
               }`}
               onClick={() => {
                 setActiveTab(tab);
-                setIsSidebarOpen(false);
+                setMenuOpen(false);
               }}
             >
               {tab.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
             </li>
           ))}
         </ul>
-        <p onClick={handleLogout} className="py-3 px-5 cursor-pointer text-red-500">
+        <p onClick={() => { handleLogout(); setMenuOpen(false); }} className="py-3 px-5 cursor-pointer text-red-500">
           Logout
         </p>
       </div>
 
       {/* Dynamic Content */}
-      <div className="flex-1 bg-white p-6">
-        <h1 className="text-xl mb-5">Account Overview</h1>
+      <div className="flex-1 bg-white p-3">
+        <h1 className="text-xl font-medium mb-5">Account Overview</h1>
 
         {activeTab === "account" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <Accountdetails />
-            <AddressBook
-              savedAddresses={savedAddresses}
-              onSelectAddress={handleSelectAddress}
-              selectedAddressIndex={selectedAddressIndex}
+            <Address
             />
             <StoreCredit />
           </div>

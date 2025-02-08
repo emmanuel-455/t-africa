@@ -46,7 +46,7 @@ function Navbar() {
 
   return (
     <div className="bg-white z-0">
-      <div className="flex w-full justify-between items-center lg:px-[130px] py-[20px] mb-5">
+      <div className="flex w-full justify-between items-center lg:px-[130px] py-[10px] mb-2">
         {/* Left Side - Logo */}
         <div className="flex w-[100%] items-center pl-4 md:pl-0 gap-2 lg:gap-6">
           <Link to="/">
@@ -84,18 +84,18 @@ function Navbar() {
         </div>
 
         {/* Right Side - Profile, Sign Up, etc. */}
-        <div className="flex items-center justify-center gap-4 pr-2 relative">
+        <div className="flex items-center justify-center gap-4 pr-5 relative">
           {isUserLoggedIn ? (
             <>
               {/* Profile Dropdown */}
               <div className="relative flex">
                 <button onClick={toggleProfileDropdown} className=" lg:flex justify-center gap-2 font-bold items-center">
-                  <img src={Profile} alt="Profile" className="lg:w-[35px] md:w-[35px] w-[35px]" />
+                  <img src={Profile} alt="Profile" className="lg:w-[35px] md:w-[35px] w-[55px]" />
                   <p className='lg:block font-normal hidden'>Chidalu</p>
                   <FiChevronDown className="lg:block hidden" size={20} />
                 </button>
                 {isProfileDropdownOpen && (
-                  <div className="absolute right-0 top-5 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-50">
+                  <div className="absolute right-0 top-9 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-50">
                     <Link to="/profile?tab=account" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
                       <FiUser className="mr-2" /> My Account
                     </Link>

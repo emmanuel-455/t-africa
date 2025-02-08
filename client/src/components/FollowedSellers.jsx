@@ -45,7 +45,7 @@ const FollowedSellers = () => {
   };
 
   return (
-    <div className="mt-10 p-8 border rounded-xl bg-gray-100 shadow-xl">
+    <div className="mt-10 md:p-8 border rounded-xl bg-gray-100 shadow-xl">
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Followed Sellers</h3>
       {followedSellers.length === 0 ? (
         <p className="text-sm text-gray-600">You are not following any sellers.</p>

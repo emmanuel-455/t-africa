@@ -42,8 +42,6 @@ const CheckoutPage = () => {
     }
   };
 
-  
-
   const increaseQuantity = (id) => {
     const updatedCart = cart.map((item) =>
       item.id === id ? { ...item, quantity: item.quantity + 1 } : item
@@ -91,24 +89,24 @@ const CheckoutPage = () => {
   };
 
   useEffect(() => {
-      const savedData = localStorage.getItem("shippingAddresses");
-      if (savedData) {
-        const decompressedData = decompress(savedData);
-        const parsedData = JSON.parse(decompressedData);
-        setSavedAddresses(parsedData);
-      }
-    }, []);
-  
-    const handleSelectAddress = (index) => {
-      setSelectedAddressIndex(index);
-    };
-  
-    const handleDelete = (index) => {
-      const updatedAddresses = savedAddresses.filter((_, idx) => idx !== index);
-      const compressedData = compress(JSON.stringify(updatedAddresses));
-      localStorage.setItem("shippingAddresses", compressedData);
-      setSavedAddresses(updatedAddresses);
-    };
+    const savedData = localStorage.getItem("shippingAddresses");
+    if (savedData) {
+      const decompressedData = decompress(savedData);
+      const parsedData = JSON.parse(decompressedData);
+      setSavedAddresses(parsedData);
+    }
+  }, []);
+
+  const handleSelectAddress = (index) => {
+    setSelectedAddressIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    const updatedAddresses = savedAddresses.filter((_, idx) => idx !== index);
+    const compressedData = compress(JSON.stringify(updatedAddresses));
+    localStorage.setItem("shippingAddresses", compressedData);
+    setSavedAddresses(updatedAddresses);
+  };
 
   return (
     <div className="container mx-auto flex flex-col p-4 md:p-8">
@@ -125,27 +123,12 @@ const CheckoutPage = () => {
 
       {showShippingForm && <ShippingForm onUpdateAddress={updateShippingAddress} />}
 
-      {/* {shippingAddress && (
-        <div className="mt-4 p-4 border rounded">
-          <h2 className="text-lg font-semibold">Shipping Address</h2>
-          <p>{shippingAddress.fullName}</p>
-          <p>{shippingAddress.address}, {shippingAddress.city}, {shippingAddress.state}</p>
-          <p>{shippingAddress.country} - {shippingAddress.zip}</p>
-          <button
-            onClick={removeShippingAddress}
-            className="mt-2 text-red-500 underline"
-          >
-            Remove Address
-          </button>
-        </div>
-      )} */}
-
       <AddressBook
-                      savedAddresses={savedAddresses}
-                      onSelectAddress={handleSelectAddress}
-                      onDelete={handleDelete}
-                      selectedAddressIndex={selectedAddressIndex}
-                    />
+        savedAddresses={savedAddresses}
+        onSelectAddress={handleSelectAddress}
+        onDelete={handleDelete}
+        selectedAddressIndex={selectedAddressIndex}
+      />
 
       <div className="col-span-1 mt-8">
         <h2 className="text-[18px] font-semibold mb-4">Cart Summary</h2>
@@ -201,8 +184,7 @@ const CheckoutPage = () => {
               </p>
             </div>
             <button
-              type="submit"
-              onClick={handleSubmit}
+              onClick={handleSubmit} // Explicitly call handleSubmit on click
               className="mt-3 bg-brandGreen text-white px-4 py-2 rounded-md hover:bg-green-600"
               disabled={!shippingAddress} // Disable button if no address
             >
@@ -216,4 +198,3 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
-

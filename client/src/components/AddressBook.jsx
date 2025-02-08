@@ -44,7 +44,7 @@ const AddressBook = ({ savedAddresses, onEdit, onDelete }) => {
           ))}
         </ul>
       ) : (
-        <p className="mb-3">No saved addresses yet.</p>
+        <p className="mb-3 px-3 pt-2">No saved addresses yet.</p>
       )}
       
     </div>

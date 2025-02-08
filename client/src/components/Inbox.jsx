@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FaTrashAlt, FaEnvelope } from "react-icons/fa";
 
 const Inbox = () => {
   const [messages, setMessages] = useState([]);
 
-  // Load messages from localStorage or use mock data
   useEffect(() => {
     const savedMessages = JSON.parse(localStorage.getItem("messages")) || [
       { id: 1, sender: "John Doe", content: "We would like to place a bulk order for your product.", timestamp: "2 hours ago", read: false },
@@ -14,7 +14,6 @@ const Inbox = () => {
     setMessages(savedMessages);
   }, []);
 
-  // Mark message as read
   const markAsRead = (id) => {
     const updatedMessages = messages.map((msg) =>
       msg.id === id ? { ...msg, read: true } : msg
@@ -23,7 +22,6 @@ const Inbox = () => {
     localStorage.setItem("messages", JSON.stringify(updatedMessages));
   };
 
-  // Delete message
   const deleteMessage = (id) => {
     const updatedMessages = messages.filter((msg) => msg.id !== id);
     setMessages(updatedMessages);
@@ -31,34 +29,41 @@ const Inbox = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-semibold mb-4">Inbox</h2>
+    <div className="w-full p-1">
+      <h2 className="text-xl font-medium mb-4">Inbox</h2>
       {messages.length === 0 ? (
         <p className="text-gray-500">No messages available.</p>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-6">
           {messages.map((msg) => (
-            <div key={msg.id} className={`p-4 border rounded-lg shadow-md ${msg.read ? "bg-gray-100" : "bg-white"}`}>
-              <div className="flex justify-between items-center">
-                <h4 className="text-lg font-bold">{msg.sender}</h4>
-                <span className="text-sm text-gray-500">{msg.timestamp}</span>
+            <div
+              key={msg.id}
+              className={`p-5 border rounded-lg shadow-md ${msg.read ? "bg-gray-100" : "bg-white"} transition-all transform hover:scale-105 hover:shadow-xl`}
+            >
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+                  <h4 className="text-lg font-bold text-gray-800">{msg.sender}</h4>
+                  <span className="text-sm text-gray-500 sm:ml-4">{msg.timestamp}</span>
+                </div>
+                <div className="mt-2 sm:mt-0 flex gap-6">
+                  <Link
+                    to={`/message/${msg.id}`}
+                    className="text-blue-600 text-sm hover:text-blue-800 transition-colors"
+                    onClick={() => markAsRead(msg.id)}
+                  >
+                    <FaEnvelope className="inline-block mr-1" />
+                    View Message
+                  </Link>
+                  <button
+                    onClick={() => deleteMessage(msg.id)}
+                    className="text-red-500 text-sm hover:text-red-700 transition-colors"
+                  >
+                    <FaTrashAlt className="inline-block mr-1" />
+                    Delete
+                  </button>
+                </div>
               </div>
-              <p className="text-gray-700 mt-1">{msg.content}</p>
-              <div className="flex gap-4 mt-3">
-                <Link
-                  to={`/message/${msg.id}`}
-                  className="text-blue-600 text-sm"
-                  onClick={() => markAsRead(msg.id)}
-                >
-                  View Message
-                </Link>
-                <button
-                  onClick={() => deleteMessage(msg.id)}
-                  className="text-red-500 text-sm"
-                >
-                  Delete
-                </button>
-              </div>
+              <p className="text-gray-700 mt-2 sm:mt-3">{msg.content}</p>
             </div>
           ))}
         </div>
