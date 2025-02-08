@@ -124,7 +124,7 @@ function SearchProduct() {
       {products.length ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map((product) => (
-            <div key={product.id} className="flex flex-col rounded-t-lg bg-white h-[250px] overflow-hidden">
+            <div key={product.id} className="flex flex-col rounded-t-lg bg-whit overflow-hidden">
               <Link to={`/product/${product.id}`} className="w-full h-[6rem] bg-[#E0E5EB]">
                 <img src={product.thumbnail} alt={product.title} className="p-2 w-[130px] h-full object-cover m-auto" />
               </Link>

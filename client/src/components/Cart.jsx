@@ -140,9 +140,9 @@ const CartDropdown = () => {
       {/* Cart Icon with item count */}
       <div className='cursor-pointer lg:flex items-center' onClick={toggleCart}>
         <div className='relative'>
-          <img src={CartIcon} alt="Cart" className='w-[30px] lg:w-[30px]' />
+          <img src={CartIcon} alt="Cart" className='lg:w-[35px] md:w-[35px] w-[40px]' />
           {cartItems.length > 0 && (
-            <div className='absolute top-0 right-0 bg-red-500 text-white rounded-full text-[10px] w-[16px] h-[16px] flex items-center justify-center'>
+            <div className='absolute bottom-[20px] left-4 bg-red-500 text-white rounded-full text-[10px] w-[16px] h-[16px] flex items-center justify-center'>
               {cartItems.length}
             </div>
           )}
@@ -160,3 +160,5 @@ const CartDropdown = () => {
 };
 
 export default CartDropdown;
+
+

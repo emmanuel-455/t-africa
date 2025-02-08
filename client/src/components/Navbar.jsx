@@ -11,7 +11,7 @@ import { isUserLoggedInAtom } from '../redux/Store';
 import { useAtom } from 'jotai';
 
 function Navbar() {
-  const [isUserLoggedIn] = useAtom(isUserLoggedInAtom);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useAtom(isUserLoggedInAtom);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,14 +19,13 @@ function Navbar() {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Monitor window width to determine if the device is mobile
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const toggleMobileMenu = () => setIsMobileMenuOpen((prevState) => !prevState);
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
   const openSearchOverlay = () => setIsSearchOpen(true);
   const closeSearchOverlay = () => setIsSearchOpen(false);
 
@@ -37,15 +36,21 @@ function Navbar() {
     }
   };
 
-  const toggleProfileDropdown = () => setIsProfileDropdownOpen((prevState) => !prevState);
+  const toggleProfileDropdown = () => setIsProfileDropdownOpen((prev) => !prev);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userToken'); // Clear user token
+    setIsUserLoggedIn(false); // Update Jotai state
+    navigate('/signin'); // Redirect to sign-in page
+  };
 
   return (
     <div className="bg-white z-0">
-      <div className="flex justify-between items-center md:px-[160px] py-[20px] mb-5">
+      <div className="flex w-full justify-between items-center lg:px-[130px] py-[20px] mb-5">
         {/* Left Side - Logo */}
-        <div className="flex items-center gap-2 lg:gap-16">
+        <div className="flex w-[100%] items-center pl-4 md:pl-0 gap-2 lg:gap-6">
           <Link to="/">
-            <img src={Logo} alt="Logo" className="w-[120px] lg:w-[150px]" />
+            <img src={Logo} alt="Logo" className="w-[120px] " />
           </Link>
 
           {/* Search Icon for Mobile / Input for Desktop */}
@@ -55,11 +60,11 @@ function Navbar() {
                 <FiSearch size={20} />
               </button>
             ) : (
-              <div className="flex items-center">
+              <div className="flex w-[100%] items-center">
                 <input
                   type="text"
                   placeholder="Search products, brands and categories"
-                  className="border border-gray-400 rounded-lg px-4 py-[6px] w-[500px] focus:outline-none"
+                  className="border md:w-[250px] lg:w-[300px] border-gray-400 rounded-lg px-4 py-[6px] focus:outline-none"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={(e) => {
@@ -79,32 +84,32 @@ function Navbar() {
         </div>
 
         {/* Right Side - Profile, Sign Up, etc. */}
-        <div className="flex items-center gap-3 pr-2 relative">
+        <div className="flex items-center justify-center gap-4 pr-2 relative">
           {isUserLoggedIn ? (
             <>
               {/* Profile Dropdown */}
-              <div className="relative">
-                <button onClick={toggleProfileDropdown} className="hidden lg:flex gap-2 font-bold items-center">
-                  <img src={Profile} alt="Profile" className="w-[40px]" />
-                  <p>Chidalu</p>
-                  <FiChevronDown size={20} />
+              <div className="relative flex">
+                <button onClick={toggleProfileDropdown} className=" lg:flex justify-center gap-2 font-bold items-center">
+                  <img src={Profile} alt="Profile" className="lg:w-[35px] md:w-[35px] w-[35px]" />
+                  <p className='lg:block font-normal hidden'>Chidalu</p>
+                  <FiChevronDown className="lg:block hidden" size={20} />
                 </button>
                 {isProfileDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-50">
-                    <Link to="/profile" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                  <div className="absolute right-0 top-5 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-50">
+                    <Link to="/profile?tab=account" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
                       <FiUser className="mr-2" /> My Account
                     </Link>
-                    <Link to="/orders" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <Link to="/profile?tab=orders" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
                       <FiShoppingBag className="mr-2" /> Orders
                     </Link>
-                    <Link to="/inbox" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <Link to="/profile?tab=inbox" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
                       <FiInbox className="mr-2" /> Inbox
                     </Link>
-                    <Link to="/saved" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <Link to="/profile?tab=savedItems" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
                       <FiBookmark className="mr-2" /> Saved Items
                     </Link>
                     <button
-                      onClick={() => console.log('Logout')}
+                      onClick={handleLogout}
                       className="flex items-center w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
                     >
                       <FiLogOut className="mr-2" /> Logout
@@ -119,12 +124,7 @@ function Navbar() {
             <>
               <Link to="/signin">
                 <button className="rounded-full bg-brandGreen text-white font-semibold text-nowrap px-4 py-[8px] text-xs lg:text-base">
-                  Login
-                </button>
-              </Link>
-              <Link to="/signup">
-                <button className="rounded-full bg-brandGreen text-white font-semibold text-nowrap px-4 py-[8px] text-xs lg:text-base">
-                  Sign Up
+                  Sign in
                 </button>
               </Link>
             </>
@@ -133,7 +133,7 @@ function Navbar() {
           {/* Mobile Menu Icon */}
           {isUserLoggedIn && (
             <img
-              className="block lg:hidden cursor-pointer"
+              className="block hidden cursor-pointer"
               src={Menu}
               alt="Menu"
               onClick={toggleMobileMenu}

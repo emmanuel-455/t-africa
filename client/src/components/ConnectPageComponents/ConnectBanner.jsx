@@ -35,7 +35,7 @@ const ConnectBanner = () => {
   return (
     <div className="flex mb-14 flex-col-reverse lg:flex-row gap-4 lg:h-[400px]">
       {/* Left Section with Carousel */}
-      <div className="w-[100%] lg:w-[70%] md:w-[60%] h-[300px] md:h-auto rounded-lg lg:rounded-[30px] overflow-hidden">
+      <div className="w-[100%] lg:w-[70%] md:w-[100%] h-[300px] md:h-auto rounded-lg lg:rounded-[30px] overflow-hidden">
         <Slider {...sliderSettings}>
           {bannerImages.map((image, index) => (
             <div key={index} className="w-full h-[400px] lg:h-[700px]">
@@ -57,7 +57,7 @@ const ConnectBanner = () => {
       </div>
 
       {/* Right Section */}
-      <div className="flex flex-row md:flex-col w-full lg:w-[30%] gap-4">
+      <div className="flex md:flex-row flex-row lg:flex-col w-full lg:w-[30%] gap-4">
         {/* First box */}
         <div className="bg-[#fff] rounded-lg w-full h-[140px] lg:h-[219px]">
           <ul className="pt-2 md:pt-6 px-2 md:px-6 flex flex-col gap-4 md:gap-6">

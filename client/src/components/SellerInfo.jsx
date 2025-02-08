@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const SellerInfo = () => {
   return (
-    <div className="bg-white rounded-xl py-4 mt-3 ml-3 w-full px-2">
+    <div className="bg-white inline-block rounded-xl py-4 mt-3 ml-3 w-full px-2">
       <h1 className="font-medium mb-3">SELLER INFORMATION</h1>
       <div className="flex justify-between items-end">
         <div>

@@ -34,7 +34,7 @@ const Delivery = () => {
   }, [selectedState]);
 
   return (
-    <div className='w-full rounded-xl bg-white ml-3 py-4 px-2'>
+    <div className='w-full rounded-xl bg-white py-4'>
       <h2 className='text-nowrap mb-3 text-lg font-semibold'>DELIVERY & RETURNS</h2>
       <div>Choose your location</div>
 
