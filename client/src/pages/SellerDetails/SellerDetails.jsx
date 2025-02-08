@@ -1,8 +1,9 @@
 import { FaArrowLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function SellerDetails() {
+  const navigate = useNavigate();
   const [isFollowing, setIsFollowing] = useState(false);
   const [reviews] = useState([
     { id: 1, name: "John Doe", rating: 4, comment: "Great seller, fast delivery!" },
@@ -14,7 +15,7 @@ function SellerDetails() {
     <div className="px-4 md:px-8 lg:px-16 py-8">
       {/* Back Button and Seller Title */}
       <div className="flex gap-2 mb-5 items-center">
-        <FaArrowLeft className="cursor-pointer" />
+        <FaArrowLeft className="cursor-pointer" onClick={() => navigate(-1)} />
         <h1 className="text-lg font-semibold">Seller Profile</h1>
       </div>
 
@@ -22,13 +23,13 @@ function SellerDetails() {
       <div className="bg-white shadow-md rounded-lg p-6">
         <div className="flex justify-between border-b border-gray-300 pb-6 mb-6 items-end">
           <div>
-            <Link to="/verified-sellers" className="font-semibold text-lg text-blue-600">
+            <Link to="/verified-sellers" className="font-semibold text-nowrap text-lg text-blue-600">
               ElectroWorld Store - AC
             </Link>
             <p className="text-sm mb-6 text-gray-600">88% Seller Score</p>
             <p className=""><span className="font-medium">Nigeria</span></p>
           </div>
-          <div className="flex text-sm text-nowrap items-center gap-1 md:gap-3">
+          <div className="flex justify-end flex-wrap text-sm text-nowrap items-center gap-1 md:gap-3">
             <p><span className="font-medium">118</span> Followers</p>
             <button 
               className={`text-white text-sm px-3 py-1 rounded-md transition-all ${
