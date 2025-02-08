@@ -26,9 +26,9 @@ function SellerDetails() {
               ElectroWorld Store - AC
             </Link>
             <p className="text-sm mb-6 text-gray-600">88% Seller Score</p>
-            <p>Country Of Origin: <span className="font-medium">Nigeria</span></p>
+            <p className=""><span className="font-medium">Nigeria</span></p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex text-sm text-nowrap items-center gap-1 md:gap-3">
             <p><span className="font-medium">118</span> Followers</p>
             <button 
               className={`text-white text-sm px-3 py-1 rounded-md transition-all ${
